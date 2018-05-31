@@ -1,0 +1,26 @@
+{
+  "name": "geckos-team-16",
+  "version": "1.0.0",
+  "description": "Twitter clone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tymeart/Geckos-Team-16.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tymeart/Geckos-Team-16/issues"
+  },
+  "homepage": "https://github.com/tymeart/Geckos-Team-16#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "moongoose": "0.0.5"
+  }
+}
