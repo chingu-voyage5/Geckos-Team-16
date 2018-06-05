@@ -1,20 +1,20 @@
-# Geckos-Team-16
-Twitter Clone | Voyage-5 | chingu.io
+# Chirpper 
+Twitter Clone | Voyage-5, Geckos-Team-16 | [chingu.io](https://chingu.io)
 
-Team
-  Simon - Los Angeles, CA
-  Tiffany - San Fransisco, CA
+**Team**  
+  Simon - Los Angeles, CA  
+  Tiffany - San Fransisco, CA  
   Jared - Austin, TX
   
-Goal
-   Create a clone of Twitter.
+**Goal**  
+Create a clone of Twitter.
    
-Minimal Viable Product:
-  TBD
+**Minimal Viable Product**  
+TBD
   
-Stack
-  NodeJS with Express
-  MongoDB
-  EJS
-  CSS Grid (for layout)
-  Bootstrap (for some elements)
+**Stack**
+ - NodeJS with Express
+ - MongoDB
+ - EJS
+ - CSS Grid (for layout)
+ - Bootstrap (for some elements)
