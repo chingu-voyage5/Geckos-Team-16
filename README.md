@@ -65,6 +65,7 @@ Switch back to the branch you were working on and merge:
 git checkout <your branch name>
 git merge upstream/dev
 ```
-Fix any conflicts and push your new branch to origin (your fork on Github).
+Fix any conflicts and push your new branch to origin (your fork on Github):  
+`git push origin <your branch name>`
 
 In your repo on Github, make a pull request from your new branch against the `dev` branch of the original repo.
