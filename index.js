@@ -1,8 +1,8 @@
 //App Requirements
 const express = require('express'),
       app = express(),
-      bodyParser = require('body-parser');
-      // mongoose = require('mongoose');
+      bodyParser = require('body-parser'),
+      // mongoose = require('mongoose'),
       PATH = require('path');
 
 const routeController = require('./routes/routes.js');
