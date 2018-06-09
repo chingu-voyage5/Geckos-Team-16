@@ -1,4 +1,4 @@
-module.exports = function(app) {
+module.exports = function(app) { 
   
   app.get('/', function(req, res){
     res.send('it works');
@@ -15,6 +15,6 @@ module.exports = function(app) {
 
   app.get('/timeline', function(req, res){
     res.render('timeline');
-  })
+  });
 
 }

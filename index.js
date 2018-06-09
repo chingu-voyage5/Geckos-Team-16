@@ -18,7 +18,8 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-routeController(app);
+//fire route controller(s);
+routeController(app); //we're passing in the express app so we can use express within the routes.js file.
 
 app.listen(process.env.PORT || 3000, function () {
   console.log('Server is listening on port 3000');
