@@ -1,7 +1,7 @@
 module.exports = function(app) { 
   
   app.get('/', function(req, res){
-    res.send('it works');
+    res.render('landing');
   });
 
   app.get('/createUser', function(req, res){
