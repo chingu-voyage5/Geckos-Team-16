@@ -5,7 +5,8 @@
     <!--bootstrap css-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!--local css-->
-    <link rel="stylesheet" type="text/css" href="css/createUser.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/createUser.css">
     <!--fontawesome-->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   </head>
@@ -14,16 +15,15 @@
 
     <div class="wrapper">
       <div class="container">
-        <i class="fas fa-hand-lizard"></i>
-        <h3>Create your account</h3>
-          <form>
-              <input type="email" name="email" placeholder="E-mail">
-              <input type="text" name="username" placeholder="Username" >
-              <input type="password" name="password" placeholder="Password" >
+        <i class="fas fa-hand-lizard fa-2x" data-fa-transform="flip-h"></i> 
+        <h2>Create your account</h2>
+          <form action="/createUser" method="POST"> 
+              <input type="email" name="email" placeholder="E-mail" required>
+              <input type="text" name="username" placeholder="Username" required>
+              <input type="password" name="password" placeholder="Password" required>
               <input type="submit" class="btn btn-primary btn-sm">
           </form>
-
-      </div> <!--End (form) container-->
+      </div> <!--End container-->
     </div> <!--End wrapper-->
    
     <script src="js/createUser.js"></script>
