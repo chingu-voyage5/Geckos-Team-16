@@ -1,0 +1,70 @@
+
+body{
+  background-color: #1ba2e2d4;
+}
+
+.wrapper {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 30% 40% 30%;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: 
+    ".     .     ."
+    ". container ."
+    ".     .     ."
+}
+
+.container {
+  /* background-color: darkgray; */
+  grid-area: container;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  background-color: #FFF;
+  border-radius: 5px;
+  padding: 20px 40px 25px;
+}
+
+.fa-hand-lizard {
+  align-self: center;
+  color: #1ba2e2d4;
+}
+
+h2 {
+  margin-top: 90px;
+  margin-bottom: 30px;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+form > input {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 25px;
+  border: none;
+  border-bottom: 3px solid lightgray;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-bottom: 3px solid #1ba2e2d4;
+}
+
+form > input[type="submit"] {
+  align-self: center;
+  width: 40%;
+  
+  margin-top: 10px;
+}
