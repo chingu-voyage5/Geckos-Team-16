@@ -1,3 +1,5 @@
+const User = require('../../models/user');
+
 module.exports = function(app) { 
   
   app.get('/', function(req, res){
@@ -9,10 +11,17 @@ module.exports = function(app) {
   });
 
   app.post('/createUser', function(req, res){
-    //normal use case:
-    //  checks to see if email/username doesn't alraedy exist, and if it doesn't...
-    //  adds a new record and then...
-    //  auto-redirects to timeline page (logged in as that newly created user)
+        User.create({
+          email: req.body.email,
+          username: req.body.username,
+          password: req.body.password
+        }, function(err, user){
+          if(err){
+            console.log(err);
+          } else { 
+            console.log(user); 
+          }
+        });
 
     //handle the following edge cases:
     // email already exists
@@ -21,6 +30,7 @@ module.exports = function(app) {
     //  --blank spaces, non-expected characters, ect.  Do we want to spend effort on this?
 
     console.log(req.body); //just logging to console for now.
+    console.log(typeof(req.body));
     res.redirect('/timeline');
   });
 
