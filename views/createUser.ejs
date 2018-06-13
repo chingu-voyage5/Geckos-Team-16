@@ -18,9 +18,10 @@
         <i class="fas fa-hand-lizard fa-2x" data-fa-transform="flip-h"></i> 
         <h2>Create your account</h2>
           <form action="/createUser" method="POST"> 
-              <input type="email" name="email" placeholder="E-mail" required>
-              <input type="text" name="username" placeholder="Username" required>
-              <input type="password" name="password" placeholder="Password" required>
+              <!-- all of the value from createUser input is added to "user" object --> 
+              <input type="email" name="user[email]" placeholder="E-mail" required>
+              <input type="text" name="user[username]" placeholder="Username" required>
+              <input type="password" name="user[password]" placeholder="Password" required>
               <input type="submit" class="btn btn-primary btn-sm">
           </form>
       </div> <!--End container-->
@@ -30,3 +31,4 @@
   </body>
 
 </html>
+
