@@ -34,7 +34,8 @@ var userSchema = new mongoose.Schema({
        firstLastName: String
    },
    deleted: {
-       type: Boolean,    
+       type: Boolean,
+       default: 0   
    }
    //numChirps: {
        //find object and function syntax to count chirp
