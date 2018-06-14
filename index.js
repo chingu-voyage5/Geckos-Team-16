@@ -1,13 +1,13 @@
 //App Requirements
 const express = require('express'),
       app = express(),
-      bodyParser = require('body-parser');
-      // mongoose = require('mongoose');
+      bodyParser = require('body-parser'),
+      mongoose = require('mongoose');
 
-const routeController = require('./controllers/routes/routes.js');
+const routeController = require('./controllers/routes/routes');
 
-// const dburl = 'mongodb://localhost/chirpper';
-// mongoose.connect(dburl);
+const dburl = 'mongodb://localhost/chirpper';
+mongoose.connect(dburl);
 
 //App configurations
 app.set('view engine', 'ejs');
@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //Fire controller(s)
 routeController(app);
+
 
 app.listen(process.env.PORT || 3000, function () {
   console.log('Server is listening on port 3000');
