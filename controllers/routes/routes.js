@@ -26,25 +26,27 @@ module.exports = function(app) {
   });
 
   //Create Route - chirp
-  Chirp.create({
-  body: "This is my first chirp!"}, function(err, chirp){
-  if(err){
-    console.log(err);
-  } else { 
-    console.log(chirp); 
-  }
-});
-        // User.create({
-        //   email: req.body.email,
-        //   username: req.body.username,
-        //   password: req.body.password
-        // }, function(err, user){
-        //   if(err){
-        //     console.log(err);
-        //   } else { 
-        //     console.log(user); 
-        //   }
-        // });
+  
+  // Chirp.create({
+    //   body: "This is my first chirp!"}, function(err, chirp){
+      //     if (err) {
+        //       console.log(err);
+        //     } else {
+          //       console.log(chirp);
+          //     }
+          // });
+          
+    // User.create({
+    //   email: req.body.email,
+    //   username: req.body.username,
+    //   password: req.body.password
+    // }, function(err, user){
+    //   if(err){
+    //     console.log(err);
+    //   } else { 
+    //     console.log(user);
+    //   }
+    // });
 
     //handle the following edge cases:
     // email already exists
