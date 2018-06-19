@@ -36,10 +36,11 @@ var userSchema = new mongoose.Schema({
    deleted: {
        type: Boolean,
        default: 0   
-   }
-   //numChirps: {
-       //find object and function syntax to count chirp
-   //}
+   },
+   chirps: [{
+       type: mongoose.Schema.Types.ObjectId,
+       ref: "Chirp"
+   }]
 });
 
 //Model Config

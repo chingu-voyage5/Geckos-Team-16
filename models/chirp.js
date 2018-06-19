@@ -7,7 +7,7 @@ var chirpSchema = new mongoose.Schema({
         minlength: 1,
         maxlength: 280
     },
-    created: {
+    createdDate: {
         type: Date,
         default: Date.now
     }, 
@@ -15,11 +15,14 @@ var chirpSchema = new mongoose.Schema({
         type: Boolean, 
         default: 0
     },
-
-    //numlikes: {
-        //how do we want like funtion to work?
-        //find object and function syntax to count likes
-    //}
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
+    numLikes: {
+        type: Number,
+        default: 0
+    }
 
     //comment: 
         //1. create comment button in chirp.ejs 
@@ -27,12 +30,12 @@ var chirpSchema = new mongoose.Schema({
         //3. write Comment.create callback inside Chirp.create in routes.js
         //4. embed comment below to chirpSchema
         
-        /* comment: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Comment"
-            } 
-        ] */
+//         comment: [
+//             {
+//                 type: mongoose.Schema.Types.ObjectId,
+//                 ref: "Comment"
+//             } 
+//         ]
 
     //reChirp: ? 
     //embedPhoto: ?
