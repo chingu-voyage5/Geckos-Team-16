@@ -26,16 +26,35 @@ module.exports = function(app) {
   });
 
   //Create Route - chirp
-  
   // Chirp.create({
-    //   body: "This is my first chirp!"}, function(err, chirp){
-      //     if (err) {
-        //       console.log(err);
-        //     } else {
-          //       console.log(chirp);
-          //     }
-          // });
+  //     body: "This is my first chirp!", function(err, chirp){
+  //         if (err) {
+  //             console.log(err);
+  //           } else {
+  //               console.log(chirp);
+  //             }
+  //         });
           
+  //Associate chirp to user
+  Chirp.create({
+    body: "The chirp for this content will show in console and user db!"
+  }, function(err, chirp){ //a. create post
+    User.findOne({email: "chirpformtest2@user.com"}).populate("chirps").exec(function(err, foundUser){ //b. find user, populate chirp, execute query
+      if(err){
+        console.log(err);
+      } else {
+        foundUser.chirps.push(chirp); //c. add chirp into user's chirps
+        foundUser.save(function(err, data){ //d. save user
+          if(err){
+            console.log(err);
+          } else {
+            console.log(data);
+          }
+        });
+      }
+    });
+  });
+
     // User.create({
     //   email: req.body.email,
     //   username: req.body.username,
