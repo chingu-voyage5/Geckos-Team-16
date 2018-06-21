@@ -2,81 +2,59 @@ const User = require('../../models/user');
 const Chirp = require('../../models/chirp');
 
 module.exports = function(app) { 
-  
+  //Landing page
   app.get('/', function(req, res){
     res.render('landing');
   });
 
-  //New Route - createUser
+  //"Sign up" for a user account
   app.get('/createUser', function(req, res){
     res.render('createUser');
   });
 
-  //Create Route - createUser
+  //Create new User
   app.post('/createUser', function(req, res){
-    //all of the value from createUser input is added to "user" object 
+    //All of the values from sign-up inputs are added to "user" object 
     User.create(req.body.user, function(err, user){ 
       if(err){
         res.render('createUser');
       } else {
-        res.redirect('/timeline');
-        console.log(user); 
+        //Does anything else need to happen here?
+        //Should this redirect to '/timeline/:username/'?
+        res.redirect('/timeline/');
       }
     });
   });
 
-  //Create Route - chirp
-  // Chirp.create({
-  //     body: "This is my first chirp!", function(err, chirp){
-  //         if (err) {
-  //             console.log(err);
-  //           } else {
-  //               console.log(chirp);
-  //             }
-  //         });
-          
-  //Associate chirp to user
-  Chirp.create({
-    body: "The chirp for this content will show in console and user db!"
-  }, function(err, chirp){ //a. create post
-    User.findOne({email: "chirpformtest2@user.com"}).populate("chirps").exec(function(err, foundUser){ //b. find user, populate chirp, execute query
+  //Create new Chirp
+  app.post('/timeline/:user/createChirp', function(req, res){   //Change to POST
+  //Search for this user. (This will be replaced by middlware).
+    User.findOne({email: "tester123321@abc.com"}, function(err, currentUser){ 
+      //If the search itself errors...
       if(err){
         console.log(err);
-      } else {
-        foundUser.chirps.push(chirp); //c. add chirp into user's chirps
-        foundUser.save(function(err, data){ //d. save user
-          if(err){
-            console.log(err);
-          } else {
-            console.log(data);
-          }
-        });
+        res.send('Something went wrong when trying to find the User...');
+      } 
+      //If the search doesn't find a match.  
+      else if (currentUser === null) {
+          res.send('User not found; so chirp NOT created');
+      }
+      //User was found; create and add the chirp to this User's chirps.
+      else {
+        Chirp.create(
+          {
+            body: req.body.newChirpBody,
+            user: currentUser._id 
+          }, 
+          function(error, newChirp){
+            currentUser.chirps.push(newChirp);
+            currentUser.save();
+            console.log(currentUser.username + ' just chirped: "' + newChirp.body + '"');
+            res.send(currentUser.chirps); //change to res.reload to timeline?
+        });       
       }
     });
   });
-
-    // User.create({
-    //   email: req.body.email,
-    //   username: req.body.username,
-    //   password: req.body.password
-    // }, function(err, user){
-    //   if(err){
-    //     console.log(err);
-    //   } else { 
-    //     console.log(user);
-    //   }
-    // });
-
-    //handle the following edge cases:
-    // email already exists
-    // username already exists 
-    // possible invalid data submitted for email, username, password?
-    //  --blank spaces, non-expected characters, ect.  Do we want to spend effort on this?
-
-    // console.log(req.body); //just logging to console for now.
-    // console.log(typeof(req.body));
-    // res.redirect('/timeline');
-  // });
 
   app.get('/timeline', function(req, res){
     res.render('timeline');
