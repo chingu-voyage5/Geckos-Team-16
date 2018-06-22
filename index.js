@@ -2,11 +2,15 @@
 const express = require('express'),
       app = express(),
       bodyParser = require('body-parser'),
-      mongoose = require('mongoose');
+      mongoose = require('mongoose'),
+      passport = require('passport'),
+      passportLocalMongoose = require('passport-local-mongoose'),
+      LocalStrategy = require('passport-local'),
+      User = require('./models/user');
 
 const routeController = require('./controllers/routes/routes');
 
-const dburl = 'mongodb://localhost/chirpper';
+const dburl = 'mongodb://localhost/chirpper'; 
 mongoose.connect(dburl);
 
 //App configurations
@@ -15,6 +19,18 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Passport configurations
+app.use(require('express-session')({
+  secret: 'all the tacos',
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 //Fire controller(s)
 routeController(app);
