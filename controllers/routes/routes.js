@@ -1,5 +1,6 @@
 const User = require('../../models/user');
 const Chirp = require('../../models/chirp');
+const passport = require('passport');
 
 module.exports = function(app) { 
   //Landing page
@@ -14,22 +15,33 @@ module.exports = function(app) {
 
   //Create new User
   app.post('/createUser', function(req, res){
+    // req.body.username
+    // req.body.password
     //All of the values from sign-up inputs are added to "user" object 
-    User.create(req.body.user, function(err, user){ 
-      if(err){
-        res.render('createUser');
-      } else {
-        //Does anything else need to happen here?
-        //Should this redirect to '/timeline/:username/'?
-        res.redirect('/timeline/');
+    User.register(new User({username: req.body.username}, req.body.password, function(err, user) {
+      if (err) {
+        console.log(err);
+        return res.send('Something went wrong')
       }
-    });
+      passport.authenticate('local')(req, res, function(req, res) {
+        res.redirect('/timeline');
+      });
+    }));
+    // User.create(req.body.user, function(err, user){ 
+    //   if(err){
+    //     res.render('createUser');
+    //   } else {
+    //     //Does anything else need to happen here?
+    //     //Should this redirect to '/timeline/:username/'?
+    //     res.redirect('/timeline/');
+    //   }
+    // });
   });
 
   //Create new Chirp
-  app.post('/timeline/:user/createChirp', function(req, res){   //Change to POST
+  app.post('/timeline/:username/createChirp', function(req, res){   //Change to POST
   //Search for this user. (This will be replaced by middlware).
-    User.findOne({email: "tester123321@abc.com"}, function(err, currentUser){ 
+    User.findOne({email: "kwest@gmail.com"}, function(err, currentUser){ 
       //If the search itself errors...
       if(err){
         console.log(err);
@@ -56,8 +68,15 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/timeline', function(req, res){
+  app.get('/timeline', isLoggedIn, function(req, res){
     res.render('timeline');
   });
 
+}
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
 }
