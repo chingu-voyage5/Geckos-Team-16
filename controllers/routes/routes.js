@@ -9,26 +9,25 @@ module.exports = function(app) {
   });
 
   //"Sign up" for a user account
-  app.get('/createUser', function(req, res){
+  app.get('/createUser', function(req, res){ 
     res.render('createUser');
   });
 
   //Create new User
   app.post('/createUser', function(req, res){
-    req.body.username
-    req.body.password
     //All of the values from sign-up inputs are added to "user" object 
     User.register(new User({username: req.body.username}), req.body.password, function(err, user) {
       if (err) {
         console.log(err);
-        return res.render('createUser');
+        return res.render('createUser'); //maybe redirect? nice-to-have: give validation.
       }
       passport.authenticate('local')(req, res, function() {
-        res.redirect('/timeline');
+        console.log(req.user);
+        res.redirect('/timeline/' + req.user.username);
       });
-    });
 
-    //========== End of storing user data refactoring 
+      
+    });
 
     // User.create(req.body.user, function(err, user){ 
     //   if(err){
@@ -40,6 +39,23 @@ module.exports = function(app) {
     //   }
     // });
   });
+
+  app.get('/login', function(req, res) {
+    res.render("login");
+  });
+
+  app.post('/login', passport.authenticate('local', {
+    failureRedirect: '/login'
+  }), function(req, res) {
+    // res.locals.currentUser = req.user;
+    res.redirect('/timeline/' + req.user.username);        
+  });
+
+  app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/login');
+  });
+
 
   //Create new Chirp
   app.post('/timeline/:username/createChirp', function(req, res){   //Change to POST
@@ -71,7 +87,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/timeline', isLoggedIn, function(req, res){
+  app.get('/timeline/:username', function(req, res){
     res.render('timeline');
   });
 
