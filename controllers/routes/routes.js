@@ -15,18 +15,21 @@ module.exports = function(app) {
 
   //Create new User
   app.post('/createUser', function(req, res){
-    // req.body.username
-    // req.body.password
+    req.body.username
+    req.body.password
     //All of the values from sign-up inputs are added to "user" object 
-    User.register(new User({username: req.body.username}, req.body.password, function(err, user) {
+    User.register(new User({username: req.body.username}), req.body.password, function(err, user) {
       if (err) {
         console.log(err);
-        return res.send('Something went wrong')
+        return res.render('createUser');
       }
-      passport.authenticate('local')(req, res, function(req, res) {
+      passport.authenticate('local')(req, res, function() {
         res.redirect('/timeline');
       });
-    }));
+    });
+
+    //========== End of storing user data refactoring 
+
     // User.create(req.body.user, function(err, user){ 
     //   if(err){
     //     res.render('createUser');
