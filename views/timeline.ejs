@@ -1,3 +1,13 @@
 <% if (currentUser) { %>
   <a href="/logout">Logout</a>
 <% } %>
+
+<h1>This is <%= user.username %>'s timeline!</h1>
+<p>
+  These are their chirps:
+  <ul>
+    <% for (let i = 0; i < user.chirps.length; i++) { %>
+      <li><%= user.chirps[i] %></li>
+    <% } %>
+  </ul>
+</p>

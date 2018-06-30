@@ -88,7 +88,11 @@ module.exports = function(app) {
   });
 
   app.get('/timeline/:username', function(req, res){
-    res.render('timeline');
+    User.findOne({username: req.params.username}).populate('chirps').exec(function(err, user) {
+      if (err) console.log(err);
+      // if user doesn't exist, redirect to error page
+      res.render('timeline', {user});
+    });
   });
 
 }
