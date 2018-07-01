@@ -1,3 +1,53 @@
-<% if (currentUser) { %>
-  <a href="/logout">Logout</a>
-<% } %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- Enhancement Nice-to-have: add code to pull in name(if exists)/username to page title -->
+  <title>Chirpper</title> 
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/timeline.css">
+</head>
+
+<body>
+  
+  <div class="topbar-container">
+    <div class="topbar alignedToMainGrid">
+      <% if (currentUser) { %>
+        <a href="/logout">Logout</a>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="main-page-container">
+    
+    <div class="heroColor-container">
+      <div class="heroColor alignedToMainGrid">
+          <div class="profileAvatar"></div>
+      </div>
+    </div>
+
+    <div class="user-profile-bar-container">
+      <div class="user-profile-bar alignedToMainGrid">
+        <div class="userProfileBar-left"></div>
+        <div class="userProfileBar-middle"></div>
+        <div class="userProfileBar-right"></div>
+      </div>
+    </div>
+   
+    <div class="main-grid alignedToMainGrid">
+      <div class="profile-sidebar"></div>
+      <div class="timeline"></div>
+      <div class="sidebar-right"></div>
+    </div> <!--End: main-grid-->
+
+  </div> <!--End: main-page-container -->
+
+</body>
+</html>
+
+
+
+
+
+
