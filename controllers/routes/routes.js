@@ -47,7 +47,6 @@ module.exports = function(app) {
   app.post('/login', passport.authenticate('local', {
     failureRedirect: '/login'
   }), function(req, res) {
-    // res.locals.currentUser = req.user;
     res.redirect('/timeline/' + req.user.username);        
   });
 
@@ -56,7 +55,7 @@ module.exports = function(app) {
     res.redirect('/login');
   });
 
-
+ 
   //Create new Chirp
   app.post('/timeline/:username/createChirp', function(req, res){   //Change to POST
   //Search for this user. (This will be replaced by middlware).
@@ -91,7 +90,7 @@ module.exports = function(app) {
     res.render('timeline');
   });
 
-}
+} //End: module.exports
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
