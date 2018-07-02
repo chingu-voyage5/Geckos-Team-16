@@ -38,8 +38,11 @@
     <div class="main-grid alignedToMainGrid">
       <div class="profile-sidebar"></div>
       <div class="timeline">
-        <h1>This is
-          <%= user.username %>'s timeline!</h1>
+        <h1>This is <%= user.username %>'s timeline!</h1>
+        <form action="/timeline/<%= user.username %>/createChirp" method="POST">
+          <input type="text" name="newChirpBody" placeholder="What's happening?" maxlength="140">
+          <button class="btn btn-primary btn-sm">Chirp</button>
+        </form>
         <p>
           These are their chirps:
           <ul>

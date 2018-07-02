@@ -42,11 +42,9 @@ module.exports = function(app) {
     res.redirect('/login');
   });
 
-
   // Create new Chirp
-  app.post('/timeline/:username/createChirp', function(req, res){   //Change to POST
-  //Search for this user. (This will be replaced by middlware).
-    User.findOne({email: "kwest@gmail.com"}, function(err, currentUser){ 
+  app.post('/timeline/:username/createChirp', isLoggedIn, function(req, res){
+    User.findOne({username: req.user.username}, function(err, currentUser){ 
       //If the search itself errors...
       if(err){
         console.log(err);
@@ -54,7 +52,7 @@ module.exports = function(app) {
       } 
       //If the search doesn't find a match.  
       else if (currentUser === null) {
-          res.send('User not found; so chirp NOT created');
+        res.send('User not found; so chirp NOT created');
       }
       //User was found; create and add the chirp to this User's chirps.
       else {
@@ -65,9 +63,14 @@ module.exports = function(app) {
           }, 
           function(error, newChirp){
             currentUser.chirps.push(newChirp);
-            currentUser.save();
-            console.log(currentUser.username + ' just chirped: "' + newChirp.body + '"');
-            res.send(currentUser.chirps); //change to res.reload to timeline?
+            currentUser.save(function(err) {
+              if (err) {
+                console.log(err);
+              } else {
+                console.log(currentUser.username + ' just chirped: "' + newChirp.body + '"');
+              }
+            });
+            res.redirect('/timeline/' + currentUser.username); //change to res.reload to timeline?
         });       
       }
     });
