@@ -37,7 +37,23 @@
    
     <div class="main-grid alignedToMainGrid">
       <div class="profile-sidebar"></div>
-      <div class="timeline"></div>
+      <div class="timeline">
+        <h1>This is <%= user.username %>'s timeline!</h1>
+        <form action="/timeline/<%= user.username %>/createChirp" method="POST">
+          <input type="text" name="newChirpBody" placeholder="What's happening?" maxlength="140">
+          <button class="btn btn-primary btn-sm">Chirp</button>
+        </form>
+        <p>
+          These are their chirps:
+          <ul>
+            <% for (let i = 0; i < user.chirps.length; i++) { %>
+              <li>
+                <%= user.chirps[i].body %>
+              </li>
+              <% } %>
+          </ul>
+        </p>
+      </div>
       <div class="sidebar-right"></div>
     </div> <!--End: main-grid-->
 
@@ -45,9 +61,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
