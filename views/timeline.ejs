@@ -7,15 +7,23 @@
   <title>Chirpper</title> 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/timeline.css">
+  <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 
 <body>
   
   <div class="topbar-container">
     <div class="topbar alignedToMainGrid">
-      <% if (currentUser) { %>
-        <a href="/logout">Logout</a>
-      <% } %>
+        <ul class="header-items">
+          <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
+          <li><i class="fas fa-hand-lizard fa-2x" data-fa-transform="flip-h"></i></li>
+          <li><button type="button" class="chirpButton">Chirp</button></li>
+          <li>
+          <% if (currentUser) { %>
+           <a href="/logout">Logout</a>
+          <% } %>
+          </li>
+        </ul>
     </div>
   </div>
 
