@@ -45,10 +45,9 @@
     <div class="main-grid alignedToMainGrid">
       <div class="profile-sidebar"></div>
       <div class="timeline">
-        <h1>This is <%= user.username %>'s timeline!</h1>
-        <form action="/timeline/<%= user.username %>/createChirp" method="POST">
-          <input type="text" name="newChirpBody" placeholder="What's happening?" maxlength="140">
-          <button class="btn btn-primary btn-sm">Chirp</button>
+        <form action="/timeline/<%= user.username %>/createChirp" method="POST" class="chirp-form">
+          <textarea name="newChirpBody" placeholder="What's happening?" maxlength="140" class="chirp-form__input"></textarea>
+          <button class="btn btn-primary chirp-form__button">Chirp</button>
         </form>
         <p>
           These are their chirps:
