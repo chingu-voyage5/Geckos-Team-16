@@ -43,7 +43,7 @@
     </div>
    
     <div class="main-grid alignedToMainGrid">
-      <div class="profile-sidebar"></div>
+      <div class="profile-sidebar"><a href="/timeline/<%= user.username %>">@<%= user.username %></a></div>
       <div class="timeline">
         <form action="/timeline/<%= user.username %>/createChirp" method="POST" class="chirp-form">
           <textarea name="newChirpBody" placeholder="What's happening?" maxlength="140" class="chirp-form__input"></textarea>

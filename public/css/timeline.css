@@ -104,6 +104,10 @@ div {
   grid-gap: 10px;
 }
 
+.profile-sidebar {
+  padding-top: 40px;
+}
+
 .main-grid {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
