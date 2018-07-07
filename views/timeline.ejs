@@ -52,14 +52,17 @@
         <ul>
           <% for (let i = 0; i < user.chirps.length; i++) { %>
             <li class="chirp">
-              <div class="chirp__details">
-                <a href="/timeline/<%= user.username %>">@<%= user.username %>
-                </a> 
-                &middot; 
-                <%= user.chirps[i].createdDate.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) %>
+              <div class="chirp-user-pic"></div>
+              <div class="chirp-content">
+                <div class="chirp-content__details">
+                  <a href="/timeline/<%= user.username %>">@<%= user.username %>
+                  </a> 
+                  &middot; 
+                  <%= user.chirps[i].createdDate.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) %>
+                </div>
+                <div class="chirp-content__body"><%= user.chirps[i].body %></div>
+                <div class="chirp-content__likes"><i class="far fa-heart"></i> <%= user.chirps[i].numLikes %></div>
               </div>
-              <div class="chirp__body"><%= user.chirps[i].body %></div>
-              <div class="chirp__likes"><i class="far fa-heart"></i> <%= user.chirps[i].numLikes %></div>
             </li>
             <% } %>
         </ul>
