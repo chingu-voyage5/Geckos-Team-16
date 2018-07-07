@@ -115,6 +115,7 @@ div {
 }
 
 .timeline {
+  background-color: #FFF;
   width: 100%;
   height: 120vh;
 }
@@ -142,4 +143,36 @@ div {
   height: 35px;
   margin-bottom: 0;
   width: 80px;
+}
+
+.chirp {
+  border-bottom: 1px solid #e6ecf0;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.chirp > div {
+  font-size: 1.6rem;
+}
+
+.chirp__details {
+  color: #5e5e5e;
+}
+
+.chirp__details a {
+  text-decoration: none;
+}
+
+.chirp__details a:hover {
+  text-decoration: underline;
+  text-decoration-skip: ink;
+}
+
+.chirp__body {
+  margin-bottom: 10px;
+}
+
+.chirp__likes {
+  color: #5e5e5e;  
 }

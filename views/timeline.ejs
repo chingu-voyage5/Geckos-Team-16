@@ -49,16 +49,20 @@
           <textarea name="newChirpBody" placeholder="What's happening?" maxlength="140" class="chirp-form__input"></textarea>
           <button class="btn btn-primary chirp-form__button">Chirp</button>
         </form>
-        <p>
-          These are their chirps:
-          <ul>
-            <% for (let i = 0; i < user.chirps.length; i++) { %>
-              <li>
-                <%= user.chirps[i].body %>
-              </li>
-              <% } %>
-          </ul>
-        </p>
+        <ul>
+          <% for (let i = 0; i < user.chirps.length; i++) { %>
+            <li class="chirp">
+              <div class="chirp__details">
+                <a href="/timeline/<%= user.username %>">@<%= user.username %>
+                </a> 
+                &middot; 
+                <%= user.chirps[i].createdDate.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) %>
+              </div>
+              <div class="chirp__body"><%= user.chirps[i].body %></div>
+              <div class="chirp__likes"><i class="far fa-heart"></i> <%= user.chirps[i].numLikes %></div>
+            </li>
+            <% } %>
+        </ul>
       </div>
       <div class="sidebar-right"></div>
     </div> <!--End: main-grid-->
