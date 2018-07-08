@@ -56,11 +56,11 @@ div {
 
 .fa-hand-lizard {
   align-self: center;
-  color: #1ba2e2d4;
+  color: #1BA2E2;
 }
 
 .chirpButton {
-  background-color: #1ba2e2d4;
+  background-color: #1BA2E2;
   color: white;
   border: none; 
   font-size: 16px; 
@@ -104,6 +104,10 @@ div {
   grid-gap: 10px;
 }
 
+.profile-sidebar {
+  padding-top: 40px;
+}
+
 .main-grid {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -111,6 +115,78 @@ div {
 }
 
 .timeline {
+  background-color: #FFF;
   width: 100%;
   height: 120vh;
+}
+
+.chirp-form {
+  background-color: #E4F4FC;
+  padding: 15px;
+  border-bottom: 1px solid #e6ecf0;
+  display: flex;
+  flex-direction: column;
+}
+
+.chirp-form__input {
+  border: 2px solid #B3D7E7;
+  border-radius: 10px;
+  font-size: 1.4rem;
+  height: 70px;
+  padding: 5px;
+  resize: none;
+}
+
+.chirp-form__button {
+  align-self: flex-end;
+  color: #FFF;
+  height: 35px;
+  margin-bottom: 0;
+  width: 80px;
+}
+
+.chirp {
+  border-bottom: 1px solid #e6ecf0;
+  display: flex;
+  padding: 10px;
+}
+
+.chirp > div {
+  font-size: 1.6rem;
+}
+
+.chirp-user-pic {
+  background-color: #1BA2E2;
+  border-radius: 100%;
+  flex-shrink: 0;
+  height: 50px;
+  margin-right: 10px;
+  width: 50px;
+}
+
+.chirp-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.chirp-content__details {
+  color: #5e5e5e;
+}
+
+.chirp-content__details a {
+  text-decoration: none;
+}
+
+.chirp-content__details a:hover {
+  text-decoration: underline;
+  text-decoration-skip: ink;
+}
+
+.chirp-content__body {
+  margin-bottom: 10px;
+}
+
+.chirp-content__likes {
+  color: #5e5e5e;  
 }

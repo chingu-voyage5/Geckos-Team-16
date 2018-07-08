@@ -3,8 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <!-- Enhancement Nice-to-have: add code to pull in name(if exists)/username to page title -->
-  <title>Chirpper</title> 
+  <title>@<%= user.username %> | Chirpper</title> 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/timeline.css">
   <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
@@ -44,23 +43,29 @@
     </div>
    
     <div class="main-grid alignedToMainGrid">
-      <div class="profile-sidebar"></div>
+      <div class="profile-sidebar"><a href="/timeline/<%= user.username %>">@<%= user.username %></a></div>
       <div class="timeline">
-        <h1>This is <%= user.username %>'s timeline!</h1>
-        <form action="/timeline/<%= user.username %>/createChirp" method="POST">
-          <input type="text" name="newChirpBody" placeholder="What's happening?" maxlength="140">
-          <button class="btn btn-primary btn-sm">Chirp</button>
+        <form action="/timeline/<%= user.username %>/createChirp" method="POST" class="chirp-form">
+          <textarea name="newChirpBody" placeholder="What's happening?" maxlength="140" class="chirp-form__input"></textarea>
+          <button class="btn btn-primary chirp-form__button">Chirp</button>
         </form>
-        <p>
-          These are their chirps:
-          <ul>
-            <% for (let i = 0; i < user.chirps.length; i++) { %>
-              <li>
-                <%= user.chirps[i].body %>
-              </li>
-              <% } %>
-          </ul>
-        </p>
+        <ul>
+          <% for (let i = 0; i < user.chirps.length; i++) { %>
+            <li class="chirp">
+              <div class="chirp-user-pic"></div>
+              <div class="chirp-content">
+                <div class="chirp-content__details">
+                  <a href="/timeline/<%= user.username %>">@<%= user.username %>
+                  </a> 
+                  &middot; 
+                  <%= user.chirps[i].createdDate.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) %>
+                </div>
+                <div class="chirp-content__body"><%= user.chirps[i].body %></div>
+                <div class="chirp-content__likes"><i class="far fa-heart"></i> <%= user.chirps[i].numLikes %></div>
+              </div>
+            </li>
+            <% } %>
+        </ul>
       </div>
       <div class="sidebar-right"></div>
     </div> <!--End: main-grid-->
