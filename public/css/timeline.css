@@ -14,10 +14,6 @@ body {
   margin: 0 auto;
 }
 
-div {
-  /* border: .1px solid red; */
-}
-
 .topbar-container {
   background-color: #fff;
   height: 46px;
