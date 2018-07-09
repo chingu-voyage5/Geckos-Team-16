@@ -76,20 +76,35 @@ module.exports = function(app) {
   });
 
   app.get('/timeline/:username', function(req, res){
+    if (!req.user) {
+      console.log('A non-logged in person accessed ' + req.params.username + '\'s timeline.');
+    } else {
+      console.log(req.user.username + ' accesed ' + req.params.username + '\'s timeline.');
+    }
+    
     User.findOne({username: req.params.username}).populate('chirps').exec(function(err, user) {
-      if (err) console.log(err);
-      // need to add: if user doesn't exist, redirect to error page
+      if (err) {
+        console.log('There was an error searching our User collection.');
+        console.log(err);
+      } else if (!user) {
+        res.send(req.params.username + ' doesn\'t exist.'); //Nice to have: create a ejs to handle this more robustly.
+      } else {
       res.render('timeline', {user});
+      }
     });
   });
+
+  function isLoggedIn(req, res, next) {
+    console.log('isLoggedIn hit');
+    if (req.isAuthenticated()) {
+      console.log('isAuthenticated hit. req.user: ' + req.user.username + '.');
+      return next();
+    }
+    res.redirect('/login');
+  }
+
 }
 
-function isLoggedIn(req, res, next) {
-  console.log('isLoggedIn hit');
-  if (req.isAuthenticated()) {
-    console.log('isAuthenticated hit');
-    console.log('from inside isAuthenticated:' + req.user);
-    return next();
-  }
-  res.redirect('/login');
-}
+
+
+

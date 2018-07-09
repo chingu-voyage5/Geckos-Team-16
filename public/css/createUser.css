@@ -29,8 +29,13 @@ body{
   padding: 20px 40px 25px;
 }
 
-.fa-hand-lizard {
+.container a {
+  display: inline-block;
   align-self: center;
+}
+
+.fa-hand-lizard {
+
   color: #1ba2e2d4;
 }
 
