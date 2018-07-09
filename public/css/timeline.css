@@ -33,6 +33,7 @@ div {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 10px 10px; 
 }
 
 .main-page-container {
@@ -66,6 +67,30 @@ div {
   font-size: 16px; 
   border-radius: 42px;
   padding: 6px 28px;
+}
+
+.sidebar-right-gecko {
+  height: 300px; 
+} 
+
+.sidebar-right-footer {
+  height: 125px; 
+  padding: 5%; 
+}
+
+.header-right > li {
+  float: right; 
+  padding-top: 10px; 
+}
+
+li {
+  list-style-type: none; 
+  padding: 0px 5px; 
+}
+
+img {
+  width: 100%; 
+  padding: 5%; 
 }
 
 .heroColor-container {
@@ -106,6 +131,7 @@ div {
 
 .profile-sidebar {
   padding-top: 40px;
+  padding-left: 5%; 
 }
 
 .main-grid {

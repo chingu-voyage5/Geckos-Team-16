@@ -7,22 +7,31 @@
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/timeline.css">
   <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    
 </head>
 
 <body>
   
   <div class="topbar-container">
     <div class="topbar alignedToMainGrid">
-        <ul class="header-items">
-          <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
-          <li><i class="fas fa-hand-lizard fa-2x" data-fa-transform="flip-h"></i></li>
-          <li><button type="button" class="chirpButton">Chirp</button></li>
-          <li>
+      <ul>
+        <li>
+          <a href="#"><i class="fas fa-home"></i> Home</a>
+        </li>
+      </ul>
+        <li>
+          <a href="#"><i class="fas fa-hand-lizard fa-2x" data-fa-transform="flip-h"></i></a>
+      </li>
+      <ul class="header-right">
+        <li>
           <% if (currentUser) { %>
-           <a href="/logout">Logout</a>
+          <a href="/logout">Logout</a>
           <% } %>
-          </li>
-        </ul>
+        </li>
+        <li>
+          <a href="/userProfile">Profile</a>
+        </li>
+      </ul>
     </div>
   </div>
 
@@ -43,7 +52,19 @@
     </div>
    
     <div class="main-grid alignedToMainGrid">
-      <div class="profile-sidebar"><a href="/timeline/<%= user.username %>">@<%= user.username %></a></div>
+      <div class="profile-sidebar">
+        <ul>
+          <li>Full Name</li>
+          <li><a href="/timeline/<%= user.username %>">@<%= user.username %></a></li>
+          <li>
+            <i class="fas fa-map-marker-alt"></i>
+            Location</li>
+          <li>
+            <i class="far fa-calendar-alt"></i>
+            Joined <%= user.joinedDate.toLocaleDateString('en-US', {month: 'long', year: 'numeric'}) %>
+          </li>
+        </ul>
+      </div>
       <div class="timeline">
         <form action="/timeline/<%= user.username %>/createChirp" method="POST" class="chirp-form">
           <textarea name="newChirpBody" placeholder="What's happening?" maxlength="140" class="chirp-form__input"></textarea>
@@ -67,9 +88,34 @@
             <% } %>
         </ul>
       </div>
-      <div class="sidebar-right"></div>
+      <div class="sidebar-right">
+        <div class="sidebar-right-gecko">
+          <img src="https://www.freeiconspng.com/uploads/lizard-icon-30.png" alt="Lizard Save Icon Format">
+        </div>
+        <div class="sidebar-right-footer">
+          <ul>
+            <li>
+              Cohort:
+              <a href="https://chingu.io/" target="_blank">Chingu</a>
+            </li>
+            <li>
+              Collaborators:
+              <a href="https://github.com/tymeart" target="_blank">Tiffany</a>
+              <a href="https://github.com/jaredschiller" target="_blank">Jared</a>
+              <a href="https://github.com/simonxcode" target="_blank">Simon</a>
+            </li>
+            <li>
+              Made with
+              <i class="fas fa-heart"></i> and
+              <i class="fas fa-coffee"></i>
+            </li>
+            <li>
+              &copy 2018 Chirpper
+            </li>
+          </ul>
+        </div>
+      </div>
     </div> <!--End: main-grid-->
-
   </div> <!--End: main-page-container -->
 
 </body>
