@@ -17,7 +17,7 @@ mongoose.connect(dburl);
 app.set('view engine', 'ejs');
 
 app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Passport configurations
@@ -37,6 +37,8 @@ app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
   next();
 })
+
+
 
 //Fire controller(s)
 routeController(app);
