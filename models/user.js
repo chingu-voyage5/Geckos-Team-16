@@ -3,26 +3,12 @@ const mongoose = require('mongoose'),
 
 //Schema Config
 var userSchema = new mongoose.Schema({
-   email: {
+    email: {
        type: String,
-     //required: true,
-     //unique: true,
+       required: true,
+       unique: true,
        lowercase: true,
-       trim: true,
-   },
-   username: {
-       type: String,
-     //required: true,
-     //unique: true,
-       minlength: 3,
-       maxlength: 12,
        trim: true
-   },
-   password: {
-       type: String,
-       //required: true,
-       trim: true,
-       minlength: 5        
    },
    joinedDate: {
        type: Date,
