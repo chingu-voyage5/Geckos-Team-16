@@ -80,8 +80,11 @@
       <div class="timeline">
         <% if (currentUser && (currentUser.username === user.username)) { %>
         <form action="/timeline/<%= user.username %>/createChirp" method="POST" class="chirp-form">
-          <textarea name="newChirpBody" placeholder="What's happening?" maxlength="140" class="chirp-form__input"></textarea>
-          <button class="btn btn-primary chirp-form__button">Chirp</button>
+          <textarea name="newChirpBody" placeholder="What's happening?" maxlength="280" class="chirp-form__input" id="chirp-form__input"></textarea>
+          <div class="chirp-form-bottom">
+            <div id="available-chars">280</div>
+            <button class="btn btn-primary chirp-form__button">Chirp</button>
+          </div>
         </form>
         <% } else if (user.chirps.length < 1) { %>
           <h4 class="noChirpsTimeline"><%=user.username%> has not chirped yet.</h4>
@@ -137,5 +140,6 @@
     </div> <!--END: main-grid-->
   </div> <!--END: main-page-container -->
 
+  <script src="/js/characterCount.js"></script>
 </body>
 </html>
