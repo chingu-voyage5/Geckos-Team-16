@@ -11,7 +11,6 @@
 </head>
 
 <body>
-  
   <div class="topbar-container">
     <div class="topbar alignedToMainGrid">
       <ul>
@@ -38,10 +37,9 @@
         </li>
       </ul>
     </div>
-  </div>
+  </div> <!--END: topbar-container div-->
 
   <div class="main-page-container">
-    
     <div class="heroColor-container">
       <div class="heroColor alignedToMainGrid">
           <div class="profileAvatar"></div>
@@ -62,7 +60,7 @@
    
     <div class="main-grid alignedToMainGrid">
       <div class="profile-sidebar">
-        <ul>
+        <ul class=timeline-user-details>
           <li>Full Name</li>
           <li><a href="/timeline/<%= user.username %>">@<%= user.username %></a></li>
           <li>
@@ -78,15 +76,15 @@
           <li> requested user: <%= user.username %> </li>
         </ul>
       </div>
+      
       <div class="timeline">
         <% if (currentUser && (currentUser.username === user.username)) { %>
         <form action="/timeline/<%= user.username %>/createChirp" method="POST" class="chirp-form">
           <textarea name="newChirpBody" placeholder="What's happening?" maxlength="140" class="chirp-form__input"></textarea>
           <button class="btn btn-primary chirp-form__button">Chirp</button>
         </form>
-        <% } %>
-        <% if (user.chirps.length < 1) { %>
-          <div class="noChirpsTimeline"> Waiting for <%=user.username%>'s first chirp!</div>
+        <% } else if (user.chirps.length < 1) { %>
+          <h4 class="noChirpsTimeline"><%=user.username%> has not chirped yet.</h4>
         <% } else { %>
           <ul>
             <% for (let i = 0; i < user.chirps.length; i++) { %>
@@ -98,15 +96,16 @@
                     </a> 
                     &middot; 
                     <%= user.chirps[i].createdDate.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) %>
-                  </div>
+                  </div> 
                   <div class="chirp-content__body"><%= user.chirps[i].body %></div>
                   <div class="chirp-content__likes"><i class="far fa-heart"></i> <%= user.chirps[i].numLikes %></div>
-                </div>
+                </div> <!--END: chirp-content div-->
               </li>
             <% } %>
-            </ul>
-          <% } %>
-        </div>
+          </ul>
+        <% } %>
+      </div> <!--END: timeline div-->
+
       <div class="sidebar-right">
         <div class="sidebar-right-gecko">
           <img src="https://www.freeiconspng.com/uploads/lizard-icon-30.png" alt="Lizard Save Icon Format">
@@ -133,9 +132,10 @@
             </li>
           </ul>
         </div>
-      </div>
-    </div> <!--End: main-grid-->
-  </div> <!--End: main-page-container -->
+      </div> <!--END: sidebar-right div-->
+
+    </div> <!--END: main-grid-->
+  </div> <!--END: main-page-container -->
 
 </body>
 </html>

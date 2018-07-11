@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: #e6ecf0;
+  background-color: #e6ecf0 !important; 
 }
 
 .alignedToMainGrid {
@@ -145,16 +145,15 @@ img {
   text-align: center;
 }
 
-
-.profile-sidebar {
-  padding-top: 40px;
-  padding-left: 5%; 
-}
-
 .main-grid {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   grid-gap: 10px;
+}
+
+.timeline-user-details {
+  padding: 0 15px;
+  margin-top: 35px;
 }
 
 .timeline {
@@ -163,8 +162,10 @@ img {
 }
 
 .noChirpsTimeline {
+  padding-top: 30px;
+  height: 100%;
   text-align: center;
-  height: 200px;
+  color: rgba(139, 139, 139, 0.808)
 }
 
 .chirp-form {
