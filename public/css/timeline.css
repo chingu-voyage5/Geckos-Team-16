@@ -162,6 +162,11 @@ img {
   margin-top: 10px;
 }
 
+.noChirpsTimeline {
+  text-align: center;
+  height: 200px;
+}
+
 .chirp-form {
   background-color: #E4F4FC;
   padding: 15px;
