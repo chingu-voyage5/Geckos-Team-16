@@ -41,9 +41,13 @@ body{
 
 h2 {
   margin-top: 90px;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
   font-weight: bold;
   font-size: 2rem;
+}
+
+h6 {
+  margin-bottom: 30px;
 }
 
 form {
@@ -73,3 +77,4 @@ form > input[type="submit"] {
   
   margin-top: 10px;
 }
+
