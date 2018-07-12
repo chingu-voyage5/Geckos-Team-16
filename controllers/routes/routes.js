@@ -97,6 +97,34 @@ module.exports = function(app) {
     });
   });
 
+  //Edit userProfile 
+  app.get('/userProfile/:username', isLoggedIn, function (req, res) {
+    User.findById(req.params.id, function (err, foundUser) {
+      if (err) {
+        res.redirect('/timeline/:username');
+      } else {
+        res.render('userProfile', { user: foundUser });
+      }
+    });
+  });
+
+  //Update userProfile
+  app.post('/userProfile/:username/updatedProfile', isLoggedIn, function (req, res) {
+    User.findOne({ username: req.user.username }, function (err, currentUser) {
+      if (err) {
+        res.redirect('/userProfile/:username');
+      } else {
+        currentUser.profileData.firstLastName = req.body.firstLastName;
+        currentUser.profileData.bio = req.body.bio;
+        currentUser.profileData.location = req.body.location;
+        currentUser.profileData.website = req.body.website;
+        currentUser.profileData.birthdate = req.body.birthdate;
+        currentUser.save()
+        res.redirect('/timeline/' + currentUser.username);
+      }
+    });
+  });
+
   function isLoggedIn(req, res, next) {
     console.log('isLoggedIn hit');
     if (req.isAuthenticated()) {
