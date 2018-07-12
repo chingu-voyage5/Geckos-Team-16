@@ -94,6 +94,30 @@ module.exports = function(app) {
     });
   });
 
+  //Edit userProfile 
+  app.get('/userProfile/:username', function (req, res) {
+    User.findById(req.params.id, function (err, foundUser) {
+      if (err) {
+        res.redirect('/timeline/:username');
+      } else {
+        res.render('userProfile', { user: foundUser });
+      }
+    });
+  });
+
+  //Update userProfile
+  app.post('/userProfile/:username/updatedProfile', function (req, res) {
+    User.findOne({ username: req.user.username }, function (err, currentUser) {
+      if (err) {
+        res.redirect('/userProfile/:username');
+      } else {
+        currentUser.profileData.firstLastName = req.body.fullname;
+        currentUser.save()
+        res.redirect('/timeline/' + currentUser.username);
+      }
+    });
+  });
+
   function isLoggedIn(req, res, next) {
     console.log('isLoggedIn hit');
     if (req.isAuthenticated()) {
