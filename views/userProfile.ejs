@@ -22,10 +22,11 @@
             </a>
             <h2>Edit <%= currentUser.username %> profile</h2>
             <form action="/userProfile/:username/updatedProfile" method="POST">
-                <input type="text" name="fullname" placeholder="full name" minlength="3" maxlength="12">
+                <input type="text" name="firstLastName" placeholder="full name" minlength="3" maxlength="24">
                 <input type="text" name="bio" placeholder="bio" minlength="3" maxlength="60">
-                <input type="text" name="location" placeholder="location" minlength="3" maxlength="12">
-                <input type="text" name="website" placeholder="website" minlength="3" maxlength="12">
+                <input type="text" name="location" placeholder="location" minlength="3" maxlength="24">
+                <input type="text" name="website" placeholder="website" minlength="3" maxlength="24">
+                <input type="date" name="birthdate" min="1900-12-31" max="2017-12-31">
                 <input type="submit" class="btn btn-primary btn-sm">
             </form>
         </div>

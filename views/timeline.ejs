@@ -63,13 +63,14 @@
         <ul class="timeline-user-details">
           <li><%= user.profileData.firstLastName %></li>
           <li><a href="/timeline/<%= user.username %>">@<%= user.username %></a></li>
-          <li>
-            <i class="fas fa-map-marker-alt"></i>
-            Location</li>
+          <li><%= user.profileData.bio %></li>
+          <li><i class="fas fa-map-marker-alt"></i><%= user.profileData.location %></li>
+          <li><i class="fas fa-link"></i><%= user.profileData.website %></li>
           <li>
             <i class="far fa-calendar-alt"></i>
             Joined <%= user.joinedDate.toLocaleDateString('en-US', {month: 'long', year: 'numeric'}) %>
           </li>
+          <li><i class="fas fa-birthday-cake"></i><%= user.profileData.birthdate %></li>
           <% if (currentUser) { %>
             <li> current user: <%= currentUser.username %> </li>
           <% } %>

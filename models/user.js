@@ -14,11 +14,13 @@ var userSchema = new mongoose.Schema({
        type: Date,
        default: Date.now
    },
+   
    profileData: {
-       birthdate: Date,
+       firstLastName: String,
+       bio: String,
        location: String,
        website: String,
-       firstLastName: String
+       birthdate: Date   
    },
    deleted: {
        type: Boolean,
