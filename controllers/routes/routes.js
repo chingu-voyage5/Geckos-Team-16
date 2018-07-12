@@ -81,7 +81,7 @@ module.exports = function(app) {
     } else {
       console.log(req.user.username + ' accesed ' + req.params.username + '\'s timeline.');
     }
-    
+
     User.findOne({username: req.params.username}).populate('chirps').exec(function(err, user) {
       if (err) {
         console.log('There was an error searching our User collection.');
@@ -89,6 +89,9 @@ module.exports = function(app) {
       } else if (!user) {
         res.send(req.params.username + ' doesn\'t exist.'); //Nice to have: create a ejs to handle this more robustly.
       } else {
+      user.chirps.sort(function(a, b) {
+        return b.createdDate - a.createdDate;
+      });
       res.render('timeline', {user});
       }
     });
