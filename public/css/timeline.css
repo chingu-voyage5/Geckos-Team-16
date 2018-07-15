@@ -268,8 +268,6 @@ textarea:focus {
 .chirp-content__likes{
   display: inline-block;
   cursor: pointer;
-  transition-property: transform;
-  transition-duration: .15s;
 }
 
 .chirp-content__likes:hover{

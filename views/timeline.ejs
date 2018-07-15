@@ -104,12 +104,12 @@
                   </div> 
                   <div class="chirp-content__body"><%= user.chirps[i].body %></div>
                   <div class="chirp-content__likes-container">
-                    <form>
-                      <input type="hidden" action="/chirp/<%= user.chirps[i]._id %>/likeOrUnlike" method="POST">
-                    </form>
                     <div class="chirp-content__likes">
-                      <i class="far fa-heart"></i>
-                      <span><%= user.chirps[i].numLikes %></span>
+                        <form action="/chirp/<%= user.chirps[i]._id %>/likeOrUnlike" method="POST">
+                          <input type="hidden" >
+                          <i class="far fa-heart"></i>
+                          <span><%= user.chirps[i].numLikes %></span>
+                        </form>
                     </div>
                   </div>
                 </div> <!--END: chirp-content div-->

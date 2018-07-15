@@ -97,6 +97,10 @@ module.exports = function(app) {
     });
   });
 
+  app.post('/chirp/:id/likeOrUnlike', function(req, res){
+    console.log('we hit it');
+  });
+
   //Edit userProfile 
   app.get('/userProfile/:username', isLoggedIn, function (req, res) {
     User.findById(req.params.id, function (err, foundUser) {
