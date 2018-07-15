@@ -93,7 +93,7 @@
         <% } else { %>
           <ul>
             <% for (let i = 0; i < user.chirps.length; i++) { %>
-              <li class="chirp">
+              <li class="chirp" data-chirp-id="<%= user.chirps[i]._id %>">
                 <div class="chirp-user-pic"></div>
                 <div class="chirp-content">
                   <div class="chirp-content__details">
@@ -104,6 +104,9 @@
                   </div> 
                   <div class="chirp-content__body"><%= user.chirps[i].body %></div>
                   <div class="chirp-content__likes-container">
+                    <form>
+                      <input type="hidden" action="/chirp/<%= user.chirps[i]._id %>/likeOrUnlike" method="POST">
+                    </form>
                     <div class="chirp-content__likes">
                       <i class="far fa-heart"></i>
                       <span><%= user.chirps[i].numLikes %></span>
@@ -148,5 +151,6 @@
   </div> <!--END: main-page-container -->
 
   <script src="/js/characterCount.js"></script>
+  <script src="/js/likeChirp.js"></script>
 </body>
 </html>

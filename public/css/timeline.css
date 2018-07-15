@@ -216,7 +216,7 @@ textarea:focus {
   background-color: #fff;
   border-bottom: 1px solid #e6ecf0;
   display: flex;
-  padding: 10px;
+  padding: 20px 10px;
   transition-property: background-color;
   transition-duration: .15s;
 }
@@ -258,7 +258,7 @@ textarea:focus {
 }
 
 .chirp-content__body {
-  margin-bottom: 10px;
+  margin: 10px 0px;
 }
 
 .chirp-content__likes-container {
@@ -268,10 +268,13 @@ textarea:focus {
 .chirp-content__likes{
   display: inline-block;
   cursor: pointer;
+  transition-property: transform;
+  transition-duration: .15s;
 }
 
 .chirp-content__likes:hover{
-  color: red;
+  transform: scale(1.05,1.05);
+  
 }
 
 .isLiked {
