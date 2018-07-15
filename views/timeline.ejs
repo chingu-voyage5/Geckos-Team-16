@@ -103,7 +103,12 @@
                     <%= user.chirps[i].createdDate.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) %>
                   </div> 
                   <div class="chirp-content__body"><%= user.chirps[i].body %></div>
-                  <div class="chirp-content__likes"><i class="far fa-heart"></i> <%= user.chirps[i].numLikes %></div>
+                  <div class="chirp-content__likes-container">
+                    <div class="chirp-content__likes">
+                      <i class="far fa-heart"></i>
+                      <span><%= user.chirps[i].numLikes %></span>
+                    </div>
+                  </div>
                 </div> <!--END: chirp-content div-->
               </li>
             <% } %>

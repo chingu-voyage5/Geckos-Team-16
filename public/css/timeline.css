@@ -261,6 +261,19 @@ textarea:focus {
   margin-bottom: 10px;
 }
 
-.chirp-content__likes {
+.chirp-content__likes-container {
   color: #5e5e5e;  
+}
+
+.chirp-content__likes{
+  display: inline-block;
+  cursor: pointer;
+}
+
+.chirp-content__likes:hover{
+  color: red;
+}
+
+.isLiked {
+  color: red;
 }
