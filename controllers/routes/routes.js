@@ -100,33 +100,18 @@ module.exports = function(app) {
   });
 
   app.post('/chirp/:id/likeOrUnlike', isLoggedIn, function(req, res){
-    Chirp.findById(req.params.id, function(err, foundChirp) {
-      if (err) {
-        console.log(err); //What would be better appoach?
-      } else {
-        foundChirp.usersLiked.push(req.user._id);
-        foundChirp.save();
-        foundChirp.usersLiked.forEach(function(userId){
-          if (userId === req.user._id) {
-            console.log('----');
-            console.log(userId);
-            console.log(req.user._id);
-            console.log('----');
-          }
-        });
-      };
+    console.log(req.body.isLikedInput);
 
-      User.findById(foundChirp.user, function(err, foundUser) {
-        if (err) {
-          console.log(err);
-          res.redirect('/'); //What would be better appoach?
-        } else {
-          let url = '/timeline/' + foundUser.username;
-          res.redirect(url);
-        }
-      });
-    });
+
+
+    Chirp.update(
+      { _id: req.params.id},
+      { $addToSet: {usersLiked: req.user._id} }
+    ).then(function(){
+      console.log('test');
+    })
   });
+  
   
 
   

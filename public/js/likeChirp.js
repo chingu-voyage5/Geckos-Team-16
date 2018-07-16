@@ -7,18 +7,27 @@ likeChirpIcon.forEach(function(chirpLike) {
 });
 
 function toggleChirpLike() {
-  let likedOrUnlikedChirpForm = getLikedOrUnlikedChirpForm(this);
-  console.log(likedOrUnlikedChirpForm); //string
 
-  var isLiked = this.classList.toggle('isLiked');
+  
+
+  let likedOrUnlikedChirpForm = getLikedOrUnlikedChirpForm(this);
+  let likedOrUnlikedChirpFormInputValue = toggleLikeStatus(this)
+  console.log(likedOrUnlikedChirpForm); //string
+  console.log(likedOrUnlikedChirpFormInputValue);
+
+  
 
   likedOrUnlikedChirpForm.submit();
-  //what elements do I need to do front-end classes and back-end logic?
+  
 
 }
 
 function getLikedOrUnlikedChirpForm(like) {
-  let chirp = like.firstElementChild;
-  return chirp; //"chirpId" syntax is required due to dataset property.
+  let form = like.firstElementChild;
+  return form; //"chirpId" syntax is required due to dataset property.
 }
 
+function toggleLikeStatus(like) {
+  let val = like.firstElementChild.firstElementChild.value;
+  return val;
+}
