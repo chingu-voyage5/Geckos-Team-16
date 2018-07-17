@@ -156,6 +156,19 @@ img {
   margin-top: 35px;
 }
 
+.timeline-user-details > li {
+  margin: 5px 0 0 0; 
+}
+
+.timeline-user-details > li > i {
+  margin: 0 10px 0 0;
+}
+ 
+i {
+  position: relative;
+  right: 100px; 
+}
+
 .timeline {
   width: 100%;
   margin-top: 10px;
@@ -178,11 +191,17 @@ img {
 
 .chirp-form__input {
   border: 2px solid #B3D7E7;
+  color: #2e6da4;
   border-radius: 10px;
-  font-size: 1.4rem;
-  height: 70px;
-  padding: 5px;
+  font-size: 1.6rem;
+  height: 80px;
+  padding: 15px;
   resize: none;
+}
+
+textarea:focus {
+  outline-style: none;
+  box-shadow: 0px 0px 2px rgb(51, 122, 183);
 }
 
 .chirp-form-bottom {
@@ -211,6 +230,12 @@ img {
   border-bottom: 1px solid #e6ecf0;
   display: flex;
   padding: 10px;
+  transition-property: background-color;
+  transition-duration: .15s;
+}
+
+.chirp:hover {
+  background-color: #f5f8fa;
 }
 
 .chirp > div {
