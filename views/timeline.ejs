@@ -108,20 +108,22 @@
                         <form action="/chirp/<%= user.chirps[i]._id %>/likeOrUnlike" method="POST">
                           <input  type="hidden"
                                   name="isLikedInput" 
-                                  <% if (!currentUser) { %>
-                                    value=""
-                                  <% } else { %>
-                                    <% user.chirps[i].usersLiked.forEach(function(userId){ %>
+                                  <%  if (!currentUser) { %>
+                                        value=""
+                                  <%  } else if (currentUser && (user.chirps[i].usersLiked.length === 0)) { %>
+                                          value="false";
+                                  <%  } else { %>
+                                      <%  user.chirps[i].usersLiked.forEach(function(userId){ %> 
                                         <% if (userId = currentUser._id) { %>
                                             value="true"
-                                            <% return; %>
-                                          <% } else { %>
+                                        <%  return; %>
+                                        <% } else { %>
                                             value="false"
-                                          <% } %>
-                                    <% }); %>
+                                        <% } %>
+                                    <%    }); %>
                                     
                                   <% } %>
-                          >
+                          > <!-- END: input -->
                           <i class="far fa-heart"></i>
                           <span><%= user.chirps[i].numLikes %></span>
                         </form>

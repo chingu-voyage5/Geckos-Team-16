@@ -1,33 +1,31 @@
+var likeChirpIcons = Array.from(document.getElementsByClassName('chirp-content__likes'));
+    likeChirpIcons.forEach(function(likeElement) {
+      likeElement.addEventListener('click', toggleLikeStatus);
+    });
 
-
-var likeChirpIcon = Array.from(document.getElementsByClassName('chirp-content__likes'));
-
-likeChirpIcon.forEach(function(chirpLike) {
-  chirpLike.addEventListener('click', toggleChirpLike);
-});
-
-function toggleChirpLike() {
-
-  
+function toggleLikeStatus() {
 
   let likedOrUnlikedChirpForm = getLikedOrUnlikedChirpForm(this);
-  let likedOrUnlikedChirpFormInputValue = toggleLikeStatus(this)
-  console.log(likedOrUnlikedChirpForm); //string
+  let likedOrUnlikedChirpFormInputValue = usersNewLikeStatus(this);
   console.log(likedOrUnlikedChirpFormInputValue);
-
-  
-
-  likedOrUnlikedChirpForm.submit();
-  
-
+  // likedOrUnlikedChirpForm.submit();
 }
 
-function getLikedOrUnlikedChirpForm(like) {
-  let form = like.firstElementChild;
-  return form; //"chirpId" syntax is required due to dataset property.
+function getLikedOrUnlikedChirpForm(likedOrUnlikedElement) {
+  let form = likedOrUnlikedElement.firstElementChild;
+  return form; 
 }
 
-function toggleLikeStatus(like) {
-  let val = like.firstElementChild.firstElementChild.value;
+function usersNewLikeStatus(likedOrUnlikedElement) {
+  let val = likedOrUnlikedElement.firstElementChild.firstElementChild.value;
+  if (val === 'true'){
+    val = 'false';
+    likedOrUnlikedElement.classList.toggle('isLiked');
+  } else if (val === 'false') {
+    val = 'true';
+    likedOrUnlikedElement.classList.toggle('isLiked');
+  } else {
+    val = ''
+  }
   return val;
 }
