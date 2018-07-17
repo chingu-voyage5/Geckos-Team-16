@@ -96,19 +96,21 @@
               <li class="chirp">
                 <div class="chirp-user-pic"></div>
                 <div class="chirp-content">
-                  <div class="chirp-content__details">
-                    <a href="/timeline/<%= user.username %>">@<%= user.username %>
-                    </a> 
-                    &middot; 
-                    <%= user.chirps[i].createdDate.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) %>
+                  <div class="chirp-content__top">
+                    <div>
+                      <a href="/timeline/<%= user.username %>">@<%= user.username %>
+                      </a> 
+                      &middot; 
+                      <%= user.chirps[i].createdDate.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) %>
+                    </div>
+                    <% if (currentUser && (currentUser.username === user.username) ) { %>
+                      <form id="delete-btn" method="POST" action="/timeline/<%= user.username %>/chirps/<%= user.chirps[i]._id %>?_method=PUT">
+                        <button>x</button>
+                      </form>
+                    <% } %>
                   </div> 
                   <div class="chirp-content__body"><%= user.chirps[i].body %></div>
                   <div class="chirp-content__likes"><i class="far fa-heart"></i> <%= user.chirps[i].numLikes %></div>
-                  <% if (currentUser && (currentUser.username === user.username) ) { %>
-                    <form method="POST" action="/timeline/<%= user.username %>/chirps/<%= user.chirps[i]._id %>?_method=PUT">
-                      <button>x</button>
-                    </form>
-                  <% } %>
                 </div> <!--END: chirp-content div-->
               </li>
             <% } %>

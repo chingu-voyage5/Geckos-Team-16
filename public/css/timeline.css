@@ -232,8 +232,10 @@ img {
   flex-grow: 1;
 }
 
-.chirp-content__details {
+.chirp-content__top {
   color: #5e5e5e;
+  display: flex;
+  justify-content: space-between;
 }
 
 .chirp-content__details a {
