@@ -101,7 +101,7 @@ module.exports = function(app) {
   app.get('/userProfile/:username', isLoggedIn, function (req, res) {
     User.findById(req.params.id, function (err, foundUser) {
       if (err) {
-        res.redirect('/timeline/:username');
+        res.redirect('/timeline/' + foundUser.username);
       } else {
         res.render('userProfile', { user: foundUser });
       }
@@ -122,7 +122,7 @@ module.exports = function(app) {
       },
       function (err, currentUser) {
         if (err) {
-          res.redirect('/userProfile/:username');
+          res.redirect('/userProfile/' + currentUser.username);
         } else {
           res.redirect('/timeline/' + currentUser.username);
         }
