@@ -89,10 +89,14 @@ module.exports = function(app) {
       } else if (!user) {
         res.send(req.params.username + ' doesn\'t exist.'); //Nice to have: create a ejs to handle this more robustly.
       } else {
-      user.chirps.sort(function(a, b) {
-        return b.createdDate - a.createdDate;
-      });
-      res.render('timeline', {user});
+        const filteredChirps = user.chirps.filter(function(chirp) {
+          return chirp.deleted === false;
+        });
+        console.log({filteredChirps});
+        user.chirps = filteredChirps.sort(function(a, b) {
+          return b.createdDate - a.createdDate;
+        });
+        res.render('timeline', {user});
       }
     });
   });
