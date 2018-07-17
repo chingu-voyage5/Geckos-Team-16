@@ -156,6 +156,19 @@ img {
   margin-top: 35px;
 }
 
+.timeline-user-details > li {
+  margin: 5px 0 0 0; 
+}
+
+.timeline-user-details > li > i {
+  margin: 0 10px 0 0;
+}
+ 
+i {
+  position: relative;
+  right: 100px; 
+}
+
 .timeline {
   width: 100%;
   margin-top: 10px;
