@@ -104,6 +104,11 @@
                   </div> 
                   <div class="chirp-content__body"><%= user.chirps[i].body %></div>
                   <div class="chirp-content__likes"><i class="far fa-heart"></i> <%= user.chirps[i].numLikes %></div>
+                  <% if (currentUser && (currentUser.username === user.username) ) { %>
+                    <form method="POST" action="/timeline/<%= user.username %>/chirps/<%= user.chirps[i]._id %>?_method=PUT">
+                      <button>x</button>
+                    </form>
+                  <% } %>
                 </div> <!--END: chirp-content div-->
               </li>
             <% } %>

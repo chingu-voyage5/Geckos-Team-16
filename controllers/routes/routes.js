@@ -125,6 +125,14 @@ module.exports = function(app) {
     });
   });
 
+  app.put('/timeline/:username/chirps/:chirpId/', isLoggedIn, function (req, res) {
+    Chirp.findOneAndUpdate({ _id: req.params.chirpId }, { $set: { deleted: 1 } }, function (err, result) {
+      if (err) console.log(err);
+      console.log(result);
+      res.redirect('/timeline/' + req.user.username);
+    });
+  });
+
   function isLoggedIn(req, res, next) {
     console.log('isLoggedIn hit');
     if (req.isAuthenticated()) {
