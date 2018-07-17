@@ -89,10 +89,14 @@ module.exports = function(app) {
       } else if (!user) {
         res.send(req.params.username + ' doesn\'t exist.'); //Nice to have: create a ejs to handle this more robustly.
       } else {
-      user.chirps.sort(function(a, b) {
-        return b.createdDate - a.createdDate;
-      });
-      res.render('timeline', {user});
+        const filteredChirps = user.chirps.filter(function(chirp) {
+          return chirp.deleted === false;
+        });
+        
+        user.chirps = filteredChirps.sort(function(a, b) {
+          return b.createdDate - a.createdDate;
+        });
+        res.render('timeline', {user});
       }
     });
   });
@@ -127,6 +131,13 @@ module.exports = function(app) {
           res.redirect('/timeline/' + currentUser.username);
         }
       });
+  });
+
+  app.put('/timeline/:username/chirps/:chirpId/', isLoggedIn, function (req, res) {
+    Chirp.findOneAndUpdate({ _id: req.params.chirpId }, { $set: { deleted: 1 } }, function (err, result) {
+      if (err) console.log(err);
+      res.redirect('/timeline/' + req.user.username);
+    });
   });
 
   function isLoggedIn(req, res, next) {
