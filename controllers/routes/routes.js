@@ -92,7 +92,7 @@ module.exports = function(app) {
         const filteredChirps = user.chirps.filter(function(chirp) {
           return chirp.deleted === false;
         });
-        console.log({filteredChirps});
+        
         user.chirps = filteredChirps.sort(function(a, b) {
           return b.createdDate - a.createdDate;
         });
@@ -132,7 +132,6 @@ module.exports = function(app) {
   app.put('/timeline/:username/chirps/:chirpId/', isLoggedIn, function (req, res) {
     Chirp.findOneAndUpdate({ _id: req.params.chirpId }, { $set: { deleted: 1 } }, function (err, result) {
       if (err) console.log(err);
-      console.log(result);
       res.redirect('/timeline/' + req.user.username);
     });
   });
