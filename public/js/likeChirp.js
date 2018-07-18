@@ -1,14 +1,25 @@
+
 var likeChirpIcons = Array.from(document.getElementsByClassName('chirp-content__likes'));
-    likeChirpIcons.forEach(function(likeElement) {
-      likeElement.addEventListener('click', toggleLikeStatus);
-    });
+
+likeChirpIcons.forEach(function(likeElement) {
+  likeElement.addEventListener('click', toggleLikeStatus);
+
+  loadedLikeStatus = getLikedOrUnlikedChirpFormInput(likeElement).value
+  if (loadedLikeStatus === 'true') {
+    likeElement.classList.add('isLiked');
+  }
+});
+
+
+
+
 
 function toggleLikeStatus() {
-
   let likedOrUnlikedChirpForm = getLikedOrUnlikedChirpForm(this);
-  let likedOrUnlikedChirpFormInputValue = usersNewLikeStatus(this);
-  console.log(likedOrUnlikedChirpFormInputValue);
-  // likedOrUnlikedChirpForm.submit();
+  let likedOrUnlikedChirpFormInput = getLikedOrUnlikedChirpFormInput(this);
+  let toggledlikedOrUnlikedChirpFormInputValue = usersNewLikeStatus(this);
+  likedOrUnlikedChirpFormInput.value = toggledlikedOrUnlikedChirpFormInputValue;
+  likedOrUnlikedChirpForm.submit(); 
 }
 
 function getLikedOrUnlikedChirpForm(likedOrUnlikedElement) {
@@ -16,16 +27,21 @@ function getLikedOrUnlikedChirpForm(likedOrUnlikedElement) {
   return form; 
 }
 
+function getLikedOrUnlikedChirpFormInput(likedOrUnlikedElement) {
+  let input = likedOrUnlikedElement.firstElementChild.firstElementChild
+  return input;
+}
+
 function usersNewLikeStatus(likedOrUnlikedElement) {
   let val = likedOrUnlikedElement.firstElementChild.firstElementChild.value;
   if (val === 'true'){
-    val = 'false';
+    newVal = 'false';
     likedOrUnlikedElement.classList.toggle('isLiked');
   } else if (val === 'false') {
-    val = 'true';
+    newVal = 'true';
     likedOrUnlikedElement.classList.toggle('isLiked');
   } else {
-    val = ''
+    newVal = 'notLoggedIn'
   }
-  return val;
+  return newVal;
 }

@@ -102,20 +102,18 @@ module.exports = function(app) {
   app.post('/chirp/:id/likeOrUnlike', isLoggedIn, function(req, res){
     console.log(req.body.isLikedInput);
 
-
-
-    Chirp.update(
-      { _id: req.params.id},
-      { $addToSet: {usersLiked: req.user._id} }
-    ).then(function(){
-      console.log('test');
-    })
+    if (req.body.isLikedInput === 'true') {
+      Chirp.update(
+        { _id: req.params.id },
+        { $addToSet: { usersLiked: req.user._id} }
+      ).then(function(){
+        console.log('added');
+      });
+    } else {
+        console.log('Need to figure out how to remove from usersLiked');
+    }
   });
   
-  
-
-  
-
   //Edit userProfile 
   app.get('/userProfile/:username', isLoggedIn, function (req, res) {
     User.findById(req.params.id, function (err, foundUser) {
