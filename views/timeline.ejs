@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>@<%= user.username %> | Chirpper</title> 
+  <title><%= user.profileData.firstLastName %> @<%= user.username %> | Chirpper</title>
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/timeline.css">
   <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
@@ -61,16 +61,13 @@
     <div class="main-grid alignedToMainGrid">
       <div class="profile-sidebar">
         <ul class="timeline-user-details">
-          <li><%= user.profileData.firstLastName %></li>
+          <li><h3><%= user.profileData.firstLastName %></h3></li>
           <li><a href="/timeline/<%= user.username %>">@<%= user.username %></a></li>
           <li><%= user.profileData.bio %></li>
-          <li><i class="fas fa-map-marker-alt"></i><%= user.profileData.location %></li>
-          <li><i class="fas fa-link"></i><%= user.profileData.website %></li>
-          <li>
-            <i class="far fa-calendar-alt"></i>
-            Joined <%= user.joinedDate.toLocaleDateString('en-US', {month: 'long', year: 'numeric'}) %>
-          </li>
-          <li><i class="fas fa-birthday-cake"></i><%= user.profileData.birthdate %></li>
+          <li><i class="fas fa-map-marker-alt fa-fw"></i><%= user.profileData.location %></li>
+          <li><i class="fas fa-link fa-fw"></i><%= user.profileData.website %></li>
+          <li><i class="far fa-calendar-alt fa-fw"></i>Joined <%= user.joinedDate.toLocaleDateString('en-US', {month: 'long', year: 'numeric'}) %></li>
+          <li><i class="fas fa-birthday-cake fa-fw"></i>Born on <%= user.profileData.birthdate %></li>
           <% if (currentUser) { %>
             <li> current user: <%= currentUser.username %> </li>
           <% } %>
@@ -96,11 +93,18 @@
               <li class="chirp" data-chirp-id="<%= user.chirps[i]._id %>">
                 <div class="chirp-user-pic"></div>
                 <div class="chirp-content">
-                  <div class="chirp-content__details">
-                    <a href="/timeline/<%= user.username %>">@<%= user.username %>
-                    </a> 
-                    &middot; 
-                    <%= user.chirps[i].createdDate.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) %>
+                  <div class="chirp-content__top">
+                    <div>
+                      <a href="/timeline/<%= user.username %>">@<%= user.username %>
+                      </a> 
+                      &middot; 
+                      <%= user.chirps[i].createdDate.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) %>
+                    </div>
+                    <% if (currentUser && (currentUser.username === user.username) ) { %>
+                      <form id="delete-btn" method="POST" action="/timeline/<%= user.username %>/chirps/<%= user.chirps[i]._id %>?_method=PUT">
+                        <button>x</button>
+                      </form>
+                    <% } %>
                   </div> 
                   <div class="chirp-content__body"><%= user.chirps[i].body %></div>
                   <div class="chirp-content__likes-container">

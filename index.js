@@ -2,6 +2,7 @@
 const express = require('express'),
       app = express(),
       bodyParser = require('body-parser'),
+      methodOverride = require('method-override'),
       mongoose = require('mongoose'),
       passport = require('passport'),
       passportLocalMongoose = require('passport-local-mongoose'),
@@ -19,6 +20,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
 // Passport configurations
 app.use(require('express-session')({

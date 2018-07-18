@@ -20,19 +20,17 @@
             <a href="/">
                 <i class="fas fa-hand-lizard fa-2x" data-fa-transform="flip-h"></i>
             </a>
-            <h2>Edit <%= currentUser.username %> profile</h2>
+            <h2>Edit @<%= currentUser.username %> profile</h2>
             <form action="/userProfile/:username/updatedProfile" method="POST">
-                <input type="text" name="firstLastName" placeholder="full name" minlength="3" maxlength="24">
-                <input type="text" name="bio" placeholder="bio" minlength="3" maxlength="60">
-                <input type="text" name="location" placeholder="location" minlength="3" maxlength="24">
-                <input type="text" name="website" placeholder="website" minlength="3" maxlength="24">
-                <input type="date" name="birthdate" min="1900-12-31" max="2017-12-31">
+                <input type="text" value="<%= currentUser.profileData.firstLastName %>" name="firstLastName" placeholder="full name" minlength="3" maxlength="24">
+                <input type="text" value="<%= currentUser.profileData.bio %>" name="bio" placeholder="bio" minlength="3" maxlength="60">
+                <input type="text" value="<%= currentUser.profileData.location %>" name="location" placeholder="location" minlength="3" maxlength="24">
+                <input type="text" value="<%= currentUser.profileData.website %>" name="website" placeholder="website" minlength="3" maxlength="24">
+                <input type="date" value="<%= currentUser.profileData.birthdate %>" name="birthdate" min="1900-01-01" max="2017-12-31">
                 <input type="submit" class="btn btn-primary btn-sm">
             </form>
-        </div>
-        <!--End container-->
-    </div>
-    <!--End wrapper-->
+        </div><!--End container-->
+    </div><!--End wrapper-->
 
     <!-- <script src="js/createUser.js"></script> -->
 </body>
