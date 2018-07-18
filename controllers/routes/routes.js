@@ -105,12 +105,36 @@ module.exports = function(app) {
         { _id: req.params.id },
         { $addToSet: { usersLiked: req.user._id} }
       ).then(function(){
-        res.redirect('/timeline/tracer')
-      });
+        Chirp.findById(req.params.id).populate('user').exec(function(err, foundChirp) {
+            if (err) {
+              res.redirect('/');
+            } else {
+              res.redirect('/timeline/' + foundChirp.user.username);
+            }
+          });
+        });
     } else {
-        console.log('Need to figure out how to remove from usersLiked');
+      Chirp.update(
+        { _id: req.params.id },
+        { $pull: { usersLiked: req.user._id} }
+      ).then(function(){
+        Chirp.findById(req.params.id).populate('user').exec(function(err, foundChirp) {
+            if (err) {
+              res.redirect('/');
+            } else {
+              res.redirect('/timeline/' + foundChirp.user.username);
+            }
+          });
+        });
     }
 
+    // Chirp.findById(req.params.id).populate('user').exec(function(err, foundChirp) {
+    //   if (err) {
+    //     res.redirect('/');
+    //   } else {
+    //     res.redirect('/timeline/' + foundChirp.user.username);
+    //   }
+    // });
     
   });
   
