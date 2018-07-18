@@ -100,18 +100,18 @@ module.exports = function(app) {
   });
 
   app.post('/chirp/:id/likeOrUnlike', isLoggedIn, function(req, res){
-    console.log(req.body.isLikedInput);
-
     if (req.body.isLikedInput === 'true') {
       Chirp.update(
         { _id: req.params.id },
         { $addToSet: { usersLiked: req.user._id} }
       ).then(function(){
-        console.log('added');
+        res.redirect('/timeline/tracer')
       });
     } else {
         console.log('Need to figure out how to remove from usersLiked');
     }
+
+    
   });
   
   //Edit userProfile 

@@ -10,10 +10,6 @@ likeChirpIcons.forEach(function(likeElement) {
   }
 });
 
-
-
-
-
 function toggleLikeStatus() {
   let likedOrUnlikedChirpForm = getLikedOrUnlikedChirpForm(this);
   let likedOrUnlikedChirpFormInput = getLikedOrUnlikedChirpFormInput(this);
@@ -37,11 +33,9 @@ function usersNewLikeStatus(likedOrUnlikedElement) {
   if (val === 'true'){
     newVal = 'false';
     likedOrUnlikedElement.classList.toggle('isLiked');
-  } else if (val === 'false') {
+  } else {
     newVal = 'true';
     likedOrUnlikedElement.classList.toggle('isLiked');
-  } else {
-    newVal = 'notLoggedIn'
   }
   return newVal;
 }
