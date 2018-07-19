@@ -27,10 +27,14 @@ body {
 
 .topbar {
   height: 100%;
+}
+
+.topbar ul {
+  align-items: center;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  padding: 10px 10px; 
+  margin: 0;
+  padding: 0 10px;
 }
 
 .main-page-container {
@@ -80,7 +84,7 @@ body {
   padding: 5%; 
 }
 
-.header-right > li {
+.header-right {
   float: right; 
   padding-top: 10px; 
 }
