@@ -281,7 +281,6 @@ textarea:focus {
 
 .chirp-content__likes:hover{
   transform: scale(1.05,1.05);
-  
 }
 
 .isLiked {
