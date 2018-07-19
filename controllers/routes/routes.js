@@ -1,8 +1,6 @@
 const User = require('../../models/user');
 const Chirp = require('../../models/chirp');
 const passport = require('passport');
-var mongoose = require('mongoose');
-
 
 module.exports = function(app) { 
   //Landing page
