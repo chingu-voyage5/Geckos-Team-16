@@ -22,24 +22,11 @@ var chirpSchema = new mongoose.Schema({
     numLikes: {
         type: Number,
         default: 0
-    }
-
-    //comment: 
-        //1. create comment button in chirp.ejs 
-        //2. create comment schema in comment.js
-        //3. write Comment.create callback inside Chirp.create in routes.js
-        //4. embed comment below to chirpSchema
-        
-//         comment: [
-//             {
-//                 type: mongoose.Schema.Types.ObjectId,
-//                 ref: "Comment"
-//             } 
-//         ]
-
-    //reChirp: ? 
-    //embedPhoto: ?
-    //embedVideo: ?
+    },
+    usersLiked: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }]
 }); 
 
 //Model Config
