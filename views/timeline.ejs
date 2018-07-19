@@ -1,3 +1,170 @@
-timeline
+<!DOCTYPE html>
+<html lang="en">
 
-<img src="https://farm4.staticflickr.com/3849/14926450127_947e5b2c57.jpg">
+<head>
+  <meta charset="UTF-8">
+  <title><%= user.profileData.firstLastName %> @<%= user.username %> | Chirpper</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/timeline.css">
+  <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    
+</head>
+
+<body>
+  <div class="topbar-container">
+    <div class="topbar alignedToMainGrid">
+      <ul>
+        <li>
+          <% if (currentUser) { %>
+            <a href="/timeline/<%= currentUser.username %>"><i class="fas fa-home"></i> Home</a>
+          <% } else { %>
+            <a href="/"><i class="fas fa-home"></i> Home</a>
+          <%  } %>
+        </li>
+      </ul>
+        <li>
+          <% if (currentUser) { %>
+            <a href="/timeline/<%= currentUser.username %>"><i class="fas fa-hand-lizard fa-2x" data-fa-transform="flip-h"></i></a>
+          <% } else { %>
+            <a href="/"><i class="fas fa-hand-lizard fa-2x" data-fa-transform="flip-h"></i></a>
+          <%  } %>
+      </li>
+      <ul class="header-right">
+        <li>
+          <% if (currentUser) { %>
+          <a href="/logout">Logout</a>
+          <% } %>
+        </li>
+      </ul>
+    </div>
+  </div> <!--END: topbar-container div-->
+
+  <div class="main-page-container">
+    <div class="heroColor-container">
+      <div class="heroColor alignedToMainGrid">
+          <div class="profileAvatar"></div>
+      </div>
+    </div>
+
+    <div class="user-profile-bar-container">
+      <div class="user-profile-bar alignedToMainGrid">
+        <div class="userProfileBar-left"></div>
+        <div class="userProfileBar-middle"></div>
+        <div class="userProfileBar-right">
+          <% if (currentUser && (currentUser.username === user.username)) { %>
+            <a class="editProfile-button" href="/userProfile/<%=currentUser.username%>">Edit Profile</a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+   
+    <div class="main-grid alignedToMainGrid">
+      <div class="profile-sidebar">
+        <ul class="timeline-user-details">
+          <li><h3><%= user.profileData.firstLastName %></h3></li>
+          <li><a href="/timeline/<%= user.username %>">@<%= user.username %></a></li>
+          <li><%= user.profileData.bio %></li>
+          <li><i class="fas fa-map-marker-alt fa-fw"></i><%= user.profileData.location %></li>
+          <li><i class="fas fa-link fa-fw"></i><%= user.profileData.website %></li>
+          <li><i class="far fa-calendar-alt fa-fw"></i>Joined <%= user.joinedDate.toLocaleDateString('en-US', {month: 'long', year: 'numeric'}) %></li>
+          <li><i class="fas fa-birthday-cake fa-fw"></i>Born on <%= user.profileData.birthdate %></li>
+          <% if (currentUser) { %>
+            <li> current user: <%= currentUser.username %> </li>
+          <% } %>
+          <li> requested user: <%= user.username %> </li>
+        </ul>
+      </div>
+      
+      <div class="timeline">
+        <% if (currentUser && (currentUser.username === user.username) ) { %>
+        <form action="/timeline/<%= user.username %>/createChirp" method="POST" class="chirp-form">
+          <textarea name="newChirpBody" placeholder="What's happening?" minlength="1" maxlength="280" class="chirp-form__input" id="chirp-form__input"></textarea>
+          <div class="chirp-form-bottom">
+            <div id="available-chars">280</div>
+            <button class="btn btn-primary chirp-form__button" disabled>Chirp</button>
+          </div>
+        </form>
+        <% } %>
+        <% if ((!currentUser || currentUser.username !== user.username) && user.chirps.length < 1) { %>
+          <h4 class="noChirpsTimeline"><%=user.username%> has not chirped yet.</h4>
+        <% } else { %>
+          <ul>
+            <% for (let i = 0; i < user.chirps.length; i++) { %>
+              <li class="chirp">
+                <div class="chirp-user-pic"></div>
+                <div class="chirp-content">
+                  <div class="chirp-content__top">
+                    <div>
+                      <a href="/timeline/<%= user.username %>">@<%= user.username %>
+                      </a> 
+                      &middot; 
+                      <%= user.chirps[i].createdDate.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) %>
+                    </div>
+                    <% if (currentUser && (currentUser.username === user.username) ) { %>
+                      <form id="delete-btn" method="POST" action="/timeline/<%= user.username %>/chirps/<%= user.chirps[i]._id %>?_method=PUT">
+                        <button>x</button>
+                      </form>
+                    <% } %>
+                  </div> 
+                  <div class="chirp-content__body"><%= user.chirps[i].body %></div>
+                  <div class="chirp-content__likes-container">
+                    <div class="chirp-content__likes">
+                        <form action="/chirp/<%= user.chirps[i]._id %>/likeOrUnlike" method="POST">
+                          <input  type="hidden"
+                                  name="isLikedInput" 
+                                  <%  if (currentUser && (user.chirps[i].usersLiked.length > 0)) { %>
+                                    <%  user.chirps[i].usersLiked.forEach(function(userId){ %>
+                                          <% if (userId.toString() === currentUser._id.toString()) { %>
+                                            value = "true"
+                                            <% } %>
+                                        <%  }); %>
+                                    <% } %>
+                                  
+                          > <!-- END: input -->
+                          <i class="far fa-heart"></i>
+                          <span><%= user.chirps[i].usersLiked.length %></span>
+                        </form>
+                    </div>
+                  </div>
+                </div> <!--END: chirp-content div-->
+              </li>
+            <% } %>
+          </ul>
+        <% } %>
+      </div> <!--END: timeline div-->
+
+      <div class="sidebar-right">
+        <div class="sidebar-right-gecko">
+          <img src="https://www.freeiconspng.com/uploads/lizard-icon-30.png" alt="Lizard Save Icon Format">
+        </div>
+        <div class="sidebar-right-footer">
+          <ul>
+            <li>
+              Cohort:
+              <a href="https://chingu.io/" target="_blank">Chingu</a>
+            </li>
+            <li>
+              Collaborators:
+              <a href="https://github.com/tymeart" target="_blank">Tiffany</a>
+              <a href="https://github.com/jaredschiller" target="_blank">Jared</a>
+              <a href="https://github.com/simonxcode" target="_blank">Simon</a>
+            </li>
+            <li>
+              Made with
+              <i class="fas fa-heart"></i> and
+              <i class="fas fa-coffee"></i>
+            </li>
+            <li>
+              &copy 2018 Chirpper
+            </li>
+          </ul>
+        </div>
+      </div> <!--END: sidebar-right div-->
+
+    </div> <!--END: main-grid-->
+  </div> <!--END: main-page-container -->
+
+  <script src="/js/characterCount.js"></script>
+  <script src="/js/likeChirp.js"></script>
+</body>
+</html>
