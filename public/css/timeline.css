@@ -160,13 +160,8 @@ img {
   margin: 5px 0 0 0; 
 }
 
-.timeline-user-details > li > i {
-  margin: 0 10px 0 0;
-}
- 
-i {
-  position: relative;
-  right: 100px; 
+.timeline-user-details > li > svg {
+  margin: 0 5px 0 0;
 }
 
 .timeline {
