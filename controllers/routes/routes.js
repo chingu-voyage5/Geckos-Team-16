@@ -43,14 +43,14 @@ module.exports = function(app) {
 
   // Create new Chirp
   app.post('/timeline/:username/createChirp', isLoggedIn, function(req, res){
-    User.findOne({username: req.user.username}, function(err, currentUser){ 
+    User.findOne({username: req.user.username}, function(err, foundUser){ 
       //If the search itself errors...
       if(err){
         console.log(err);
         res.send('Something went wrong when trying to find the User...');
       } 
       //If the search doesn't find a match.  
-      else if (currentUser === null) {
+      else if (foundUser === null) {
         res.send('User not found; so chirp NOT created');
       }
       //User was found; create and add the chirp to this User's chirps.
@@ -58,18 +58,18 @@ module.exports = function(app) {
         Chirp.create(
           {
             body: req.body.newChirpBody,
-            user: currentUser._id 
+            user: foundUser._id 
           }, 
           function(error, newChirp){
-            currentUser.chirps.push(newChirp);
-            currentUser.save(function(err) {
+            foundUser.chirps.push(newChirp);
+            foundUser.save(function(err) {
               if (err) {
                 console.log(err);
               } else {
-                console.log(currentUser.username + ' just chirped: "' + newChirp.body + '"');
+                console.log(foundUser.username + ' just chirped: "' + newChirp.body + '"');
               }
             });
-            res.redirect('/timeline/' + currentUser.username); //change to res.reload to timeline?
+            res.redirect('/timeline/' + foundUser.username); //change to res.reload to timeline?
         });       
       }
     });
@@ -101,6 +101,36 @@ module.exports = function(app) {
     });
   });
 
+  app.post('/chirp/:id/likeOrUnlike', isLoggedIn, function(req, res){
+    if (req.body.isLikedInput === 'true') {
+      Chirp.update(
+        { _id: req.params.id },
+        { $addToSet: { usersLiked: req.user._id} }
+      ).then(function(){
+        Chirp.findById(req.params.id).populate('user').exec(function(err, foundChirp) {
+            if (err) {
+              res.redirect('/');
+            } else {
+              res.redirect('/timeline/' + foundChirp.user.username);
+            }
+          });
+        });
+    } else {
+      Chirp.update(
+        { _id: req.params.id },
+        { $pull: { usersLiked: req.user._id} }
+      ).then(function(){
+        Chirp.findById(req.params.id).populate('user').exec(function(err, foundChirp) {
+            if (err) {
+              res.redirect('/');
+            } else {
+              res.redirect('/timeline/' + foundChirp.user.username);
+            }
+          });
+        });
+    }    
+  });
+  
   //Edit userProfile 
   app.get('/userProfile/:username', isLoggedIn, function (req, res) {
     User.findById(req.params.id, function (err, foundUser) {

@@ -107,7 +107,25 @@
                     <% } %>
                   </div> 
                   <div class="chirp-content__body"><%= user.chirps[i].body %></div>
-                  <div class="chirp-content__likes"><i class="far fa-heart"></i> <%= user.chirps[i].numLikes %></div>
+                  <div class="chirp-content__likes-container">
+                    <div class="chirp-content__likes">
+                        <form action="/chirp/<%= user.chirps[i]._id %>/likeOrUnlike" method="POST">
+                          <input  type="hidden"
+                                  name="isLikedInput" 
+                                  <%  if (currentUser && (user.chirps[i].usersLiked.length > 0)) { %>
+                                    <%  user.chirps[i].usersLiked.forEach(function(userId){ %>
+                                          <% if (userId.toString() === currentUser._id.toString()) { %>
+                                            value = "true"
+                                            <% } %>
+                                        <%  }); %>
+                                    <% } %>
+                                  
+                          > <!-- END: input -->
+                          <i class="far fa-heart"></i>
+                          <span><%= user.chirps[i].usersLiked.length %></span>
+                        </form>
+                    </div>
+                  </div>
                 </div> <!--END: chirp-content div-->
               </li>
             <% } %>
@@ -147,5 +165,6 @@
   </div> <!--END: main-page-container -->
 
   <script src="/js/characterCount.js"></script>
+  <script src="/js/likeChirp.js"></script>
 </body>
 </html>
