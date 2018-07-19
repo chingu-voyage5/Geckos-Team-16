@@ -26,15 +26,22 @@ body {
 }
 
 .topbar {
+  align-items: center;
+  display: flex;
   height: 100%;
 }
 
 .topbar ul {
-  align-items: center;
   display: flex;
   justify-content: space-between;
   margin: 0;
   padding: 0 10px;
+  width: 100%;
+}
+
+.topbar ul li a {
+  align-items: center;
+  display: flex;
 }
 
 .main-page-container {
@@ -54,11 +61,12 @@ body {
 .fa-home {
   font-size: 2em;
   color: #5e5e5e;
+  margin: 5px;
 }
 
 .fa-hand-lizard {
-  align-self: center;
   color: #1BA2E2;
+  margin: 5px;
 }
 
 .chirpButton {
@@ -85,8 +93,7 @@ body {
 }
 
 .header-right {
-  float: right; 
-  padding-top: 10px; 
+  align-self: center;
 }
 
 li {
