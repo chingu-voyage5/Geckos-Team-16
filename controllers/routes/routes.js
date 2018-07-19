@@ -130,16 +130,7 @@ module.exports = function(app) {
             }
           });
         });
-    }
-
-    // Chirp.findById(req.params.id).populate('user').exec(function(err, foundChirp) {
-    //   if (err) {
-    //     res.redirect('/');
-    //   } else {
-    //     res.redirect('/timeline/' + foundChirp.user.username);
-    //   }
-    // });
-    
+    }    
   });
   
   //Edit userProfile 
