@@ -27,7 +27,7 @@ module.exports = function(app) {
   });
 
   app.get('/login', function(req, res) {
-    res.render("login");
+    res.render('login');
   });
 
   app.post('/login', passport.authenticate('local', {
@@ -41,11 +41,30 @@ module.exports = function(app) {
     res.redirect('/login');
   });
 
+  app.get('/timeline/:username', function(req, res){
+    User.findOne({username: req.params.username}).populate('chirps').exec(function(err, user) {
+      if (err) {
+        console.log('There was an error searching our User collection. ', err);
+      } else if (!user) {
+        res.send(req.params.username + ' doesn\'t exist.'); //Nice to have: create a ejs to handle this more robustly.
+      } else {
+        const filteredChirps = user.chirps.filter(function(chirp) {
+          return chirp.deleted === false;
+        });
+        
+        user.chirps = filteredChirps.sort(function(a, b) {
+          return b.createdDate - a.createdDate;
+        });
+        res.render('timeline', {user});
+      }
+    });
+  });
+
   // Create new Chirp
   app.post('/timeline/:username/createChirp', isLoggedIn, function(req, res){
     User.findOne({username: req.user.username}, function(err, foundUser){ 
       //If the search itself errors...
-      if(err){
+      if (err) {
         console.log(err);
         res.send('Something went wrong when trying to find the User...');
       } 
@@ -69,34 +88,8 @@ module.exports = function(app) {
                 console.log(foundUser.username + ' just chirped: "' + newChirp.body + '"');
               }
             });
-            res.redirect('/timeline/' + foundUser.username); //change to res.reload to timeline?
+            res.redirect('/timeline/' + foundUser.username);
         });       
-      }
-    });
-  });
-
-  app.get('/timeline/:username', function(req, res){
-    if (!req.user) {
-      console.log('A non-logged in person accessed ' + req.params.username + '\'s timeline.');
-    } else {
-      console.log(req.user.username + ' accesed ' + req.params.username + '\'s timeline.');
-    }
-
-    User.findOne({username: req.params.username}).populate('chirps').exec(function(err, user) {
-      if (err) {
-        console.log('There was an error searching our User collection.');
-        console.log(err);
-      } else if (!user) {
-        res.send(req.params.username + ' doesn\'t exist.'); //Nice to have: create a ejs to handle this more robustly.
-      } else {
-        const filteredChirps = user.chirps.filter(function(chirp) {
-          return chirp.deleted === false;
-        });
-        
-        user.chirps = filteredChirps.sort(function(a, b) {
-          return b.createdDate - a.createdDate;
-        });
-        res.render('timeline', {user});
       }
     });
   });
@@ -131,6 +124,13 @@ module.exports = function(app) {
     }    
   });
   
+  app.put('/timeline/:username/chirps/:chirpId/', isLoggedIn, function (req, res) {
+    Chirp.findOneAndUpdate({ _id: req.params.chirpId }, { $set: { deleted: 1 } }, function (err, result) {
+      if (err) console.log(err);
+      res.redirect('/timeline/' + req.user.username);
+    });
+  });
+
   //Edit userProfile 
   app.get('/userProfile/:username', isLoggedIn, function (req, res) {
     User.findById(req.params.id, function (err, foundUser) {
@@ -141,7 +141,7 @@ module.exports = function(app) {
       }
     });
   });
-
+  
   //Update only modified fields
   app.post('/userProfile/:username/updatedProfile', isLoggedIn, function (req, res) {
     User.findOneAndUpdate({ username: req.user.username },
@@ -161,13 +161,6 @@ module.exports = function(app) {
           res.redirect('/timeline/' + currentUser.username);
         }
       });
-  });
-
-  app.put('/timeline/:username/chirps/:chirpId/', isLoggedIn, function (req, res) {
-    Chirp.findOneAndUpdate({ _id: req.params.chirpId }, { $set: { deleted: 1 } }, function (err, result) {
-      if (err) console.log(err);
-      res.redirect('/timeline/' + req.user.username);
-    });
   });
 
   function isLoggedIn(req, res, next) {
