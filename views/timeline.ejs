@@ -16,21 +16,19 @@
       <ul>
         <li>
           <% if (currentUser) { %>
-            <a href="/timeline/<%= currentUser.username %>"><i class="fas fa-home"></i> Home</a>
+            <a href="/timeline/<%= currentUser.username %>"><i class="fas fa-home"></i>Home</a>
           <% } else { %>
-            <a href="/"><i class="fas fa-home"></i> Home</a>
+            <a href="/"><i class="fas fa-home"></i>Home</a>
           <%  } %>
         </li>
-      </ul>
         <li>
           <% if (currentUser) { %>
             <a href="/timeline/<%= currentUser.username %>"><i class="fas fa-hand-lizard fa-2x" data-fa-transform="flip-h"></i></a>
           <% } else { %>
             <a href="/"><i class="fas fa-hand-lizard fa-2x" data-fa-transform="flip-h"></i></a>
           <%  } %>
-      </li>
-      <ul class="header-right">
-        <li>
+        </li>
+        <li class="header-right">
           <% if (currentUser) { %>
           <a href="/logout">Logout</a>
           <% } %>
