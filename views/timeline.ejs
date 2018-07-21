@@ -72,7 +72,7 @@
       <div class="timeline">
         <% if (currentUser && (currentUser.username === user.username) ) { %>
         <form action="/timeline/<%= user.username %>/createChirp" method="POST" class="chirp-form">
-          <textarea name="newChirpBody" placeholder="What's happening?" minlength="1" maxlength="280" class="chirp-form__input" id="chirp-form__input"></textarea>
+          <textarea name="newChirpBody" placeholder="What's happening?" minlength="1" maxlength="280" class="chirp-form__input" id="chirp-form__input" autofocus></textarea>
           <div class="chirp-form-bottom">
             <div id="available-chars">280</div>
             <button class="btn btn-primary chirp-form__button" disabled>Chirp</button>
@@ -156,8 +156,14 @@
 
     </div> <!--END: main-grid-->
   </div> <!--END: main-page-container -->
-
-  <script src="/js/characterCount.js"></script>
   <script src="/js/likeChirp.js"></script>
+  <% if(currentUser) { %>
+      <script src="/js/likeChirp.js"></script>
+    <script src="/js/characterCount.js"></script>
+  <% } %>
+  <% if(currentUser && (currentUser.profileData.enterKeyToChirp)) { %>
+    <script src="/js/enterKeyToChirp.js"></script>  
+  <% } %>
+
 </body>
 </html>
