@@ -26,6 +26,7 @@ module.exports = function(app) {
     });
   });
 
+  //User login
   app.get('/login', function(req, res) {
     res.render('login');
   });
@@ -36,11 +37,13 @@ module.exports = function(app) {
     res.redirect('/timeline/' + req.user.username);        
   });
 
+  //User logout
   app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/login');
   });
 
+  //View other User's timeline
   app.get('/timeline/:username', function(req, res){
     User.findOne({username: req.params.username}).populate('chirps').exec(function(err, user) {
       if (err) {
@@ -60,7 +63,7 @@ module.exports = function(app) {
     });
   });
 
-  // Create new Chirp
+  // Create new chirp
   app.post('/timeline/:username/createChirp', isLoggedIn, function(req, res){
     User.findOne({username: req.user.username}, function(err, foundUser){ 
       //If the search itself errors...
@@ -94,6 +97,7 @@ module.exports = function(app) {
     });
   });
 
+  //Liking a chirp
   app.post('/chirp/:id/likeOrUnlike', isLoggedIn, function(req, res){
     if (req.body.isLikedInput === 'true') {
       Chirp.update(
@@ -124,6 +128,7 @@ module.exports = function(app) {
     }    
   });
   
+  //Deleting a chirp
   app.put('/timeline/:username/chirps/:chirpId/', isLoggedIn, function (req, res) {
     Chirp.findOneAndUpdate({ _id: req.params.chirpId }, { $set: { deleted: 1 } }, function (err, result) {
       if (err) console.log(err);
@@ -163,6 +168,7 @@ module.exports = function(app) {
       });
   });
 
+  //Middleware
   function isLoggedIn(req, res, next) {
     console.log('isLoggedIn hit');
     if (req.isAuthenticated()) {
