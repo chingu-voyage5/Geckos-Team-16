@@ -1,39 +1,30 @@
-<html>
-
+<html lang="en">
 <head>
     <title>Chirpper</title>
-
-    <!--bootstrap css-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
-    <!--local css-->
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/createUser.css">
-    <!--fontawesome-->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 
 <body>
-
     <div class="wrapper">
         <div class="container">
             <a href="/">
                 <i class="fas fa-hand-lizard fa-2x" data-fa-transform="flip-h"></i>
             </a>
-            <h2>Edit @<%= currentUser.username %> profile</h2>
+            <h2>Edit @<%= currentUser.username %>'s profile</h2>
             <form action="/userProfile/:username/updatedProfile" method="POST">
                 <input type="text" value="<%= currentUser.profileData.firstLastName %>" name="firstLastName" placeholder="full name" minlength="3" maxlength="24">
                 <input type="text" value="<%= currentUser.profileData.bio %>" name="bio" placeholder="bio" minlength="3" maxlength="60">
                 <input type="text" value="<%= currentUser.profileData.location %>" name="location" placeholder="location" minlength="3" maxlength="24">
                 <input type="text" value="<%= currentUser.profileData.website %>" name="website" placeholder="website" minlength="3" maxlength="24">
                 <input type="date" value="<%= currentUser.profileData.birthdate %>" name="birthdate" min="1900-01-01" max="2017-12-31">
-                <input type="submit" class="btn btn-primary btn-sm">
+                <input type="submit" class="btn btn-primary btn-sm" value="Save">
             </form>
-        </div><!--End container-->
-    </div><!--End wrapper-->
-
-    <!-- <script src="js/createUser.js"></script> -->
+        </div>
+    </div>
 </body>
-
 </html>
 

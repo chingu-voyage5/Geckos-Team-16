@@ -40,7 +40,7 @@
   <div class="main-page-container">
     <div class="heroColor-container">
       <div class="heroColor alignedToMainGrid">
-          <div class="profileAvatar"></div>
+        <div class="profileAvatar"></div>
       </div>
     </div>
 
@@ -62,14 +62,10 @@
           <li><h3><%= user.profileData.firstLastName %></h3></li>
           <li><a href="/timeline/<%= user.username %>">@<%= user.username %></a></li>
           <li><%= user.profileData.bio %></li>
-          <li><i class="fas fa-map-marker-alt fa-fw"></i><%= user.profileData.location %></li>
-          <li><i class="fas fa-link fa-fw"></i><%= user.profileData.website %></li>
+          <li><% if (user.profileData.location) { %><i class="fas fa-map-marker-alt fa-fw"></i><% } %><%= user.profileData.location %></li>
+          <li><% if (user.profileData.website) { %><i class="fas fa-link fa-fw"></i><% } %><%= user.profileData.website %></li>
           <li><i class="far fa-calendar-alt fa-fw"></i>Joined <%= user.joinedDate.toLocaleDateString('en-US', {month: 'long', year: 'numeric'}) %></li>
-          <li><i class="fas fa-birthday-cake fa-fw"></i>Born on <%= user.profileData.birthdate %></li>
-          <% if (currentUser) { %>
-            <li> current user: <%= currentUser.username %> </li>
-          <% } %>
-          <li> requested user: <%= user.username %> </li>
+          <li><% if (user.profileData.birthdate) { %><i class="fas fa-birthday-cake fa-fw"></i>Born on <% } %><%= user.profileData.birthdate %></li>
         </ul>
       </div>
       
@@ -133,18 +129,17 @@
 
       <div class="sidebar-right">
         <div class="sidebar-right-gecko">
-          <img src="https://www.freeiconspng.com/uploads/lizard-icon-30.png" alt="Lizard Save Icon Format">
+          <img src="https://www.freeiconspng.com/uploads/lizard-icon-30.png" alt="Lizard">
         </div>
         <div class="sidebar-right-footer">
           <ul>
             <li>
-              Cohort:
-              <a href="https://chingu.io/" target="_blank">Chingu</a>
+              <a href="https://chingu.io/" target="_blank">Chingu Cohort 5</a>
             </li>
             <li>
               Collaborators:
-              <a href="https://github.com/tymeart" target="_blank">Tiffany</a>
-              <a href="https://github.com/jaredschiller" target="_blank">Jared</a>
+              <a href="https://github.com/tymeart" target="_blank">Tiffany</a>,
+              <a href="https://github.com/jaredschiller" target="_blank">Jared</a>,
               <a href="https://github.com/simonxcode" target="_blank">Simon</a>
             </li>
             <li>

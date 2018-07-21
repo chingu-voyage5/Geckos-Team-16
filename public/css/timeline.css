@@ -171,13 +171,8 @@ img {
   margin: 5px 0 0 0; 
 }
 
-.timeline-user-details > li > i {
-  margin: 0 10px 0 0;
-}
- 
-i {
-  position: relative;
-  right: 100px; 
+.timeline-user-details > li > svg {
+  margin: 0 5px 0 0;
 }
 
 .timeline {
@@ -202,7 +197,6 @@ i {
 
 .chirp-form__input {
   border: 2px solid #B3D7E7;
-  color: #2e6da4;
   border-radius: 10px;
   font-size: 1.6rem;
   height: 80px;
@@ -298,7 +292,6 @@ textarea:focus {
 
 .chirp-content__likes:hover{
   transform: scale(1.05,1.05);
-  
 }
 
 .isLiked {
