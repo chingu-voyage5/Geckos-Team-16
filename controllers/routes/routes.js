@@ -43,7 +43,7 @@ module.exports = function(app) {
     res.redirect('/login');
   });
 
-  //View other User's timeline
+  //View a user's timeline
   app.get('/timeline/:username', function(req, res){
     User.findOne({username: req.params.username}).populate('chirps').exec(function(err, user) {
       if (err) {
