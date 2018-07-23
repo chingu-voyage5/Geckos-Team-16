@@ -60,7 +60,7 @@ body {
 
 .fa-home {
   font-size: 2em;
-  color: #5e5e5e;
+  color:#1BA2E2;
   margin: 5px;
 }
 
@@ -127,6 +127,15 @@ img {
   background-color: rgba(27, 162, 226, 1);
   border: 5px solid #fff;
   border-radius: 50%;
+}
+
+.fa-user {
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  padding: 15%;
+  color: #fff;
 }
 
 .user-profile-bar-container {
