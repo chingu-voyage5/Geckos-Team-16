@@ -21,10 +21,23 @@
                 <input type="text" value="<%= currentUser.profileData.location %>" name="location" placeholder="location" minlength="3" maxlength="24">
                 <input type="text" value="<%= currentUser.profileData.website %>" name="website" placeholder="website" minlength="3" maxlength="24">
                 <input type="date" value="<%= currentUser.profileData.birthdate %>" name="birthdate" min="1900-01-01" max="2017-12-31">
+                <div>
+                    <input type="checkbox" id="enterKeyToChirp" name="enterKeyToChirp" 
+                    <% if(currentUser.profileData.enterKeyToChirp) { %>
+                        value="true" checked
+                    <% } else { %>
+                    value="false"
+                    <% } %>
+                    >
+                    <label for="enterKeyToChirp">ENTER key submits chirp</label>
+                </div>
                 <input type="submit" class="btn btn-primary btn-sm" value="Save">
             </form>
         </div>
     </div>
+
+
+
 </body>
 </html>
 

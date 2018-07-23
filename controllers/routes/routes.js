@@ -144,6 +144,12 @@ module.exports = function(app) {
   
   //Update only modified fields
   app.post('/userProfile/:username/updatedProfile', isLoggedIn, function (req, res) {
+    
+    let enterKeyToChirp = false;
+    if(req.body.enterKeyToChirp) {
+      enterKeyToChirp = true;
+    }
+
     User.findOneAndUpdate({ username: req.user.username },
       {
         $set: {
@@ -152,6 +158,7 @@ module.exports = function(app) {
           "profileData.location": req.body.location,
           "profileData.website": req.body.website,
           "profileData.birthdate": req.body.birthdate,
+          "profileData.enterKeyToChirp": enterKeyToChirp
         }
       },
       function (err, currentUser) {
