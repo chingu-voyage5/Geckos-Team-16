@@ -64,8 +64,7 @@
           <li><%= user.profileData.bio %></li>
           <li><% if (user.profileData.location) { %><i class="fas fa-map-marker-alt fa-fw"></i><% } %><%= user.profileData.location %></li>
           <li><% if (user.profileData.website) { %><i class="fas fa-link fa-fw"></i><% } %><%= user.profileData.website %></li>
-          <li><i class="far fa-calendar-alt fa-fw"></i>Joined <%= user.joinedDate.toLocaleDateString('en-US', {month: 'long', year: 'numeric'}) %></li>
-          <li><% if (user.profileData.birthdate) { %><i class="fas fa-birthday-cake fa-fw"></i>Born on <% } %><%= user.profileData.birthdate %></li>
+          <li><i class="far fa-calendar-alt fa-fw"></i>Joined <%= user.joinedDate.toLocaleDateString('en-US', {month: 'long', year: 'numeric'}) %></li> 
         </ul>
       </div>
       

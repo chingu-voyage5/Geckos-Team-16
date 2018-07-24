@@ -20,7 +20,6 @@
                 <input type="text" value="<%= currentUser.profileData.bio %>" name="bio" placeholder="bio" minlength="3" maxlength="60">
                 <input type="text" value="<%= currentUser.profileData.location %>" name="location" placeholder="location" minlength="3" maxlength="24">
                 <input type="text" value="<%= currentUser.profileData.website %>" name="website" placeholder="website" minlength="3" maxlength="24">
-                <input type="date" value="<%= currentUser.profileData.birthdate %>" name="birthdate" min="1900-01-01" max="2017-12-31">
                 <div>
                     <input type="checkbox" id="enterKeyToChirp" name="enterKeyToChirp" 
                     <% if(currentUser.profileData.enterKeyToChirp) { %>
