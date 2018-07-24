@@ -16,7 +16,6 @@ body{
 }
 
 .container {
-  /* background-color: darkgray; */
   grid-area: container;
   width: 100%;
   max-width: 500px;
@@ -35,7 +34,6 @@ body{
 }
 
 .fa-hand-lizard {
-
   color: #1ba2e2d4;
 }
 
@@ -67,14 +65,13 @@ form > input {
 input:focus,
 select:focus,
 textarea:focus {
-    outline: none;
-    border-bottom: 3px solid #1ba2e2d4;
+  outline: none;
+  border-bottom: 3px solid #1ba2e2d4;
 }
 
 form > input[type="submit"] {
   align-self: center;
   width: 40%;
-  
   margin-top: 10px;
 }
 
