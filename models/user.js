@@ -20,7 +20,11 @@ var userSchema = new mongoose.Schema({
        bio: String,
        location: String,
        website: String,
-       birthdate: Date   
+       birthdate: Date,
+       enterKeyToChirp: {
+        type: Boolean,
+        default: 0  
+       }
    },
    deleted: {
        type: Boolean,

@@ -1,18 +1,13 @@
-<html>  
+<html lang="en">  
   <head>
     <title>Chirpper</title>
-
-    <!--bootstrap css-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!--local css-->
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/createUser.css">
-    <!--fontawesome-->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   </head>
 
   <body>
-
     <div class="wrapper">
       <div class="container">
           <a href="/">
@@ -20,14 +15,13 @@
           </a>
         <h2>Create your account</h2>
           <form action="/createUser" method="POST"> 
-              <!-- all of the value from createUser input is added to "user" object --> 
               <input type="email" name="email" placeholder="E-mail" required>
               <input type="text" name="username" placeholder="Username" minlength="3" maxlength="12" required>
               <input type="password" name="password" placeholder="Password" minlength="5" required>
-              <input type="submit" class="btn btn-primary btn-sm">
+              <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
           </form>
-      </div> <!--End container-->
-    </div> <!--End wrapper-->
+      </div>
+    </div>
    
     <script src="js/createUser.js"></script>
   </body>

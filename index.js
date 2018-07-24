@@ -40,11 +40,8 @@ app.use(function(req, res, next) {
   next();
 })
 
-
-
 //Fire controller(s)
 routeController(app);
-
 
 app.listen(process.env.PORT || 3000, function () {
   console.log('Server is listening on port 3000');
