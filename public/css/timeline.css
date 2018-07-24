@@ -288,6 +288,7 @@ textarea:focus {
 
 .chirp-content__body {
   margin: 10px 0px;
+  word-break: break-word;
 }
 
 .chirp-content__likes-container {
