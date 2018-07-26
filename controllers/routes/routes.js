@@ -162,7 +162,6 @@ module.exports = function(app) {
           "profileData.bio": req.body.bio,
           "profileData.location": req.body.location,
           "profileData.website": req.body.website,
-          "profileData.birthdate": req.body.birthdate,
           "profileData.enterKeyToChirp": enterKeyToChirp
         }
       },
