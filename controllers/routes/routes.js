@@ -88,10 +88,9 @@ module.exports = function(app) {
               if (err) {
                 console.log(err);
               } else {
-                console.log(foundUser.username + ' just chirped: "' + newChirp.body + '"');
+                res.redirect('/timeline/' + foundUser.username); 
               }
             });
-            res.redirect('/timeline/' + foundUser.username);
         });       
       }
     });
