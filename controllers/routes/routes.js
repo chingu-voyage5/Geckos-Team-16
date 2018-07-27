@@ -177,9 +177,7 @@ module.exports = function(app) {
 
   //Middleware
   function isLoggedIn(req, res, next) {
-    console.log('isLoggedIn hit');
     if (req.isAuthenticated()) {
-      console.log('isAuthenticated hit. req.user: ' + req.user.username + '.');
       return next();
     }
     res.redirect('/login');
