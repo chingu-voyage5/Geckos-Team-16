@@ -88,10 +88,9 @@ module.exports = function(app) {
               if (err) {
                 console.log(err);
               } else {
-                console.log(foundUser.username + ' just chirped: "' + newChirp.body + '"');
+                res.redirect('/timeline/' + foundUser.username); 
               }
             });
-            res.redirect('/timeline/' + foundUser.username);
         });       
       }
     });
@@ -177,9 +176,7 @@ module.exports = function(app) {
 
   //Middleware
   function isLoggedIn(req, res, next) {
-    console.log('isLoggedIn hit');
     if (req.isAuthenticated()) {
-      console.log('isAuthenticated hit. req.user: ' + req.user.username + '.');
       return next();
     }
     res.redirect('/login');
