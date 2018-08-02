@@ -11,9 +11,8 @@ const express = require('express'),
 
 const routeController = require('./controllers/routes/routes');
 
-
-const dburl = 'mongodb://simonxcode:simonxcode1@ds143511.mlab.com:43511/chirpper'; 
-// const dburl = 'mongodb://localhost/chirpper'; 
+ 
+const dburl = 'mongodb://localhost/chirpper'; 
 mongoose.connect(dburl);
 
 //App configurations
